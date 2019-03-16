@@ -1,0 +1,21 @@
+<section>
+
+  <form
+    [formGroup]="searchForm">
+    <fieldset>
+      <input
+        type="text"
+        name="search"
+        formControlName="search"
+        placeholder="Search for">
+    </fieldset>
+  </form>
+
+</section>
+
+<section>
+  <app-albums
+    [albumsSearch]="search"
+    (albumsUpdate)="updatePlaylist($event)">
+  </app-albums>
+</section>

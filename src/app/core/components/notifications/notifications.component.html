@@ -1,0 +1,9 @@
+<section class="notifications">
+  <div
+    class="{{ note.type }}"
+    [ngClass]="{'display': !note.hide}"
+    (click)="hide(note)"
+    *ngFor="let note of _notifications"
+    [innerHTML]="note.message">
+  </div>
+</section>

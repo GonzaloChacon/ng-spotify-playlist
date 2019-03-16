@@ -1,0 +1,36 @@
+/**
+ * Gonzalo Chacón
+ */
+
+import { ErrorHandler, Injectable, Injector } from '@angular/core';
+
+import { NotificationsService } from '@app/core/components/notifications/notifications.service';
+import { AuthService } from './authentication.service';
+
+@Injectable()
+export class AppErrorHandler implements ErrorHandler {
+  _notificationsService: NotificationsService;
+  _authService: AuthService;
+
+  constructor(
+    private _injector: Injector
+  ) {}
+
+  handleError(error): void {
+    if (!this._notificationsService) {
+      this._notificationsService = this._injector.get<NotificationsService>(NotificationsService);
+    }
+
+    if (!this._authService) {
+      this._authService = this._injector.get<AuthService>(AuthService);
+    }
+
+    if (error.status === 401) {
+      this._notificationsService.add('error', error.message);
+      this._authService.deleteToken();
+    }
+
+    // For now just console, since I do not have any error tracking like Sentry or similar.
+    console.error(error);
+  }
+}

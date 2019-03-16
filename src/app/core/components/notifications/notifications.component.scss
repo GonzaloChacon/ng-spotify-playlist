@@ -1,0 +1,62 @@
+.notifications-container {
+  position: relative;
+}
+
+.notifications {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  z-index: 100000;
+
+  div {
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+    border: 1px solid;
+    border-radius: 2px;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 0.5em;
+    min-height: 3em;
+    opacity: 0;
+    padding: 1em;
+    text-align: center;
+    width: 300px;
+
+    &.success {
+      background-color: $color-2-green;
+      border-color: darken($color-2-green, 30%);
+    }
+
+    &.error {
+      background-color: $color-3-red;
+      border-color: darken($color-3-red, 10%);
+    }
+
+    &.warning {
+      background-color: $color-1-orange;
+      border-color: darken($color-2-red, 30%);
+    }
+
+    &.info {
+      background-color: $color-2-blue;
+      border-color: darken($color-2-blue, 30%);
+    }
+
+    &.display {
+      opacity:1;
+    }
+  }
+}
+
+@include mobile {
+  .notifications {
+    position: fixed;
+    right: 0;
+    top: 0;
+
+    div {
+      width: 100%;
+      text-align: left;
+    }
+  }
+}
