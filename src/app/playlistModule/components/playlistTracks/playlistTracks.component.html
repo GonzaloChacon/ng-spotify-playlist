@@ -1,0 +1,9 @@
+<section class="playlist-tracks">
+  <div
+    *ngFor="let track of tracks"
+    class="track {{ track.dislpay && 'display' }}">
+    <!-- TODO: for some reason ngClass is not working here, check why -->
+    <span class="track-name">{{ track.name }}</span>
+    <span>Album: <a routerLink="/playlist/album/{{track.album.id}}"> {{track.album.name}} </a></span>
+  </div>
+</section>

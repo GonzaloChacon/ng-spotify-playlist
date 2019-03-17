@@ -10,10 +10,10 @@ html {
 
 html,
 body {
-  background: $color-bg-gray;
-  color: $color-1;
+  background: $color-gray-1;
+  color: $color-font;
   font-family: $font-sans;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   -webkit-print-color-adjust: exact;
 }
 
@@ -24,4 +24,12 @@ body {
   &:focus {
     outline: none !important;
   }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-title;
+}
+
+.serif {
+  font-family: $font-serif !important;
 }

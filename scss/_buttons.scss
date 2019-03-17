@@ -1,0 +1,33 @@
+.btn {
+  border-radius: 80px;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.2rem;
+  margin-top: 10px;
+  outline: none;
+  padding: 6px 20px;
+  transition: all .3s;
+
+  i {
+    padding-left: 5px;
+  }
+
+  &-small {
+    padding: 5px 10px;
+    font-size: 1rem;
+  }
+
+  &-green {
+    background: $color-primary;
+    color: white;
+  }
+
+  &-red {
+    background: $color-red-1;
+    color: white;
+  }
+
+  &-gray {
+    background: $color-gray-2;
+  }
+}

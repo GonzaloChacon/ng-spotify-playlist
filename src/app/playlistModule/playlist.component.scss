@@ -1,0 +1,104 @@
+.module {
+  display: flex;
+  height: 100vh;
+
+  &-content {
+    background: #777;
+    flex-grow: 1;
+  }
+
+  &-aside {
+    box-shadow: 0px 0px 6px $color-font;
+    padding: 0;
+    width: 210px;
+    margin: 0;
+  }
+
+  &-tracks {
+    width: 0;
+    &.open {
+      transition: width 0.2s ease-in-out;
+      width: 340px;
+    }
+  }
+}
+
+
+// Playlists aside component
+.playlists {
+  &-item{
+    border-bottom: 1px solid $color-green-1;
+    cursor: pointer;
+    height: 42px;
+    overflow: hidden;
+    padding: 10px 15px;
+    position: relative;
+    transform: translateX(-200px);
+    transition: height .3s .2s cubic-bezier(0.455, 0.030, 0.515, 0.955), transform .2s .1s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+    width: 100%;
+
+    &:last-of-type {
+      border-bottom: 0;
+    }
+
+    &.display {
+      transform: translateX(0);
+    }
+
+    &.open {
+      height: 130px;
+    }
+
+    &.open h4 {
+      color: $color-font;
+    }
+
+    &.open p {
+      transform: translateY(0);
+    }
+
+    h4 {
+      color: rgba($color-font, 0.68);
+      font-size: 1.8rem;
+      left: 20px;
+      margin: 0;
+    }
+
+    p {
+      padding: 0 5p;
+      position: relative;
+      transform: translateY(350px);
+      transition: transform .3s .2s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+
+      span {
+        display: block;
+        margin: 0;
+      }
+
+      span:nth-child(2) {
+        font-size: 1.2rem;
+        margin: 4px 0px;
+      }
+
+      span:nth-child(3) {
+        font-size: 1.1rem;
+      }
+    }
+  }
+
+  &-tracks {
+    padding: 10px 15px;
+  }
+}
+
+@keyframes co-open {
+  0% {
+    max-height: 0;
+  }
+
+  100% {
+    max-height: 1000px;
+    overflow: initial;
+  }
+}
+// end Playlists aside component

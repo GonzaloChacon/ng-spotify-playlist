@@ -2,4 +2,14 @@
 
 @import '../scss/utils/variables';
 @import '../scss/utils/mixins';
-@import '../scss/layout/main';
+@import '../scss/fonts';
+@import '../scss/main';
+@import '../scss/buttons';
+
+// NG Components
+@import './app/core/components/notifications/notifications.component.scss';
+@import './app/playlistModule/components/searchResults/searchResults.component.scss';
+@import './app/playlistModule/playlist.component.scss';
+@import './app/playlistModule/components/album/album.component.scss';
+@import './app/playlistModule/components/artist/artist.component.scss';
+@import './app/playlistModule/components/playlistTracks/playlistTracks.component.scss';

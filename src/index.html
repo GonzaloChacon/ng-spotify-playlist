@@ -2,15 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>GonNgSpotify</title>
+  <title>Ng Spotify Playlist</title>
   <base href="/">
 
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0'/>
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" href="assets/img/favicon.ico" />
+
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/modern-normalize@0.4.0/modern-normalize.min.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/gridlex/2.7.1/gridlex.min.css">
 
   <style>
+    /*
+     * We load the spinner as first thing in order to display it if we deal with
+     * slow network like 3g.
+     */
     .spinner-container {
       position: fixed;
       top: 0;
@@ -19,6 +25,7 @@
       bottom: 0;
       background: rgba(234, 234, 234, 0.7);
       z-index: 2;
+      text-align: center;
     }
 
     .spinner-logo {

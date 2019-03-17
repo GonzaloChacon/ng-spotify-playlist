@@ -5,30 +5,30 @@
 // Media queries
 @mixin handheldAll {
   @media only all and (max-width: #{$max-tablet}) {
-      @content;
+    @content;
   }
 }
 
 @mixin mobile {
   @media only all and (max-width: #{$max-mobile}) {
-      @content;
+    @content;
   }
 }
 
 @mixin notMobile {
   @media only all and (min-width: #{$max-mobile}) {
-      @content;
+    @content;
   }
 }
 
 @mixin tablet {
   @media only all and (min-width: #{$max-mobile}) and (max-width: #{$max-tablet}) {
-      @content;
+    @content;
   }
 }
 
 @mixin desktop {
   @media only all and (min-width: #{$max-tablet}) {
-      @content;
+    @content;
   }
 }

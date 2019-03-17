@@ -13,7 +13,7 @@ export interface IArtist {
   genres?: string[]
   href: string
   id: string
-  images?: IAlbumImage[]
+  images?: IImage[]
   name: string
   popularity?: number
   type: string
@@ -29,7 +29,7 @@ export interface IAlbum {
   }
   href: string
   id: string
-  images: IAlbumImage[]
+  images: IImage[]
   name: string
   release_date: string
   release_date_precision: string
@@ -43,6 +43,7 @@ export interface ITrack {
   artists: IArtist[]
   available_markets: string[]
   disc_number: number
+  dislpay?: boolean
   duration_ms: number
   explicit: boolean
   external_ids: {
@@ -57,13 +58,57 @@ export interface ITrack {
   name: string
   popularity: number
   preview_url: string
+  remove?: boolean
   track_number: number
   type: string
   uri: string
 }
 
-export interface IAlbumImage {
+export interface IImage {
   height: number
   url: string
   width: number
+}
+
+export interface IPlaylist {
+  collaborative: boolean
+  dislpay?: boolean
+  external_urls: {
+    spotify: string
+  }
+  href: string
+  id: string
+  images: IImage[]
+  name: string
+  owner: IOwner
+  primary_color: string
+  public: boolean
+  remove?: boolean
+  snapshot_id: string
+  tracks: {
+    href: string
+    total: number
+    list?: ITrack[]
+  }
+  type: string
+  uri: string
+}
+
+export interface IOwner {
+  country?: string
+  display_name: string
+  email?: string
+  external_urls: {
+    spotify: string
+  }
+  followers?: {
+    href: string
+    total: number
+  }
+  href: string
+  id: string
+  images?: IImage[]
+  product?: string
+  type: string
+  uri: string
 }

@@ -1,0 +1,86 @@
+<section class="module">
+
+  <div class="module-aside">
+    <!-- Search -->
+    <form
+      [formGroup]="searchForm">
+      <fieldset>
+        <input
+          type="text"
+          name="search"
+          formControlName="search"
+          placeholder="Search for"/>
+      </fieldset>
+
+      <fieldset>
+        <label for="artists">
+          <input
+            id="artists"
+            name="artists"
+            type="checkbox"
+            formControlName="artists"/>
+          Artists
+        </label>
+
+        <label for="albums">
+          <input
+            id="albums"
+            name="albums"
+            type="checkbox"
+            formControlName="albums"/>
+          Albums
+        </label>
+
+        <label for="tracks">
+          <input
+            id="tracks"
+            name="tracks"
+            type="checkbox"
+            formControlName="tracks"/>
+          Tracks
+        </label>
+      </fieldset>
+    </form>
+    <!-- end Search -->
+
+
+    <!-- Playlists -->
+    <section
+      class="playlists"
+      *ngIf="playlists">
+      <div
+        class="playlists-item {{ playlist.dislpay && 'display' }}"
+        *ngFor="let playlist of playlists; index as i"
+        [ngClass]="{'open': playlistId === playlist.id}"
+        (click)="playlistId = playlist.id">
+        <h4>{{ playlist.name }}</h4>
+
+        <p>
+          <span>Tracks <b>{{ playlist.tracks.total }}</b></span>
+          <span>Owner <b>{{ playlist.owner.display_name }}</b></span>
+          <a
+            class="btn btn-gray btn-small"
+            *ngIf="playlist.owner.id === user.id">
+            Detele playlist <i class="far fa-trash-alt"></i>
+          </a>
+        </p>
+      </div>
+    </section>
+    <!-- end Playlists -->
+  </div>
+
+  <!-- Tracks -->
+  <app-playlist-tracks
+    *ngIf="playlists"
+    class="module-tracks"
+    [ngClass]="{'open': playlistId}"
+    [user]="user"
+    [playlistId]="playlistId">
+  </app-playlist-tracks>
+  <!-- end Tracks -->
+
+  <div class="module-content">
+    <router-outlet></router-outlet>
+  </div>
+
+</section>

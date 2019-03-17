@@ -4,30 +4,27 @@
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PlaylistComponent } from './components';
+import { SearchResultsComponent, AlbumComponent, ArtistComponent } from './components';
+import { PlaylistComponent } from './playlist.component';
 
 const routes: Routes = [
   {
     path: '',
     component: PlaylistComponent,
-  //   children: [
-  //     {
-  //       path: 'account',
-  //       component: AccountComponent
-  //     },
-  //     {
-  //       path: 'company',
-  //       component: CompanyComponent
-  //     },
-  //     {
-  //       path: 'team',
-  //       component: TeamComponent
-  //     },
-  //     {
-  //       path: 'warehouses',
-  //       component: WarehousesComponent
-  //     }
-  //   ]
+    children: [
+      {
+        path: '',
+        component: SearchResultsComponent
+      },
+      {
+        path: 'album/:albumId',
+        component: AlbumComponent
+      },
+      {
+        path: 'artist/:artistId',
+        component: ArtistComponent
+      }
+    ]
   }
 ];
 

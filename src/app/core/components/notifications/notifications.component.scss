@@ -23,23 +23,23 @@
     width: 300px;
 
     &.success {
-      background-color: $color-2-green;
-      border-color: darken($color-2-green, 30%);
+      background-color: $color-primary;
+      border-color: darken($color-primary, 30%);
     }
 
     &.error {
-      background-color: $color-3-red;
-      border-color: darken($color-3-red, 10%);
+      background-color: $color-red-1;
+      border-color: darken($color-red-1, 10%);
     }
 
     &.warning {
-      background-color: $color-1-orange;
-      border-color: darken($color-2-red, 30%);
+      background-color: $color-orange;
+      border-color: darken($color-orange, 30%);
     }
 
     &.info {
-      background-color: $color-2-blue;
-      border-color: darken($color-2-blue, 30%);
+      background-color: $color-blue;
+      border-color: darken($color-blue, 30%);
     }
 
     &.display {

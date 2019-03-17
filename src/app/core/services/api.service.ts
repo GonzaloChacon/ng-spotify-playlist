@@ -63,10 +63,12 @@ export class ApiService {
     );
   }
 
-  delete(path: string): Observable<any> {
-    return this._http.delete(
-      path,
-      { headers: this.headers }
-    );
+  delete(path: string, body?): Observable<any> {
+    const options = {
+      headers: this.headers,
+      body
+    };
+
+    return this._http.delete(path, options);
   }
 }

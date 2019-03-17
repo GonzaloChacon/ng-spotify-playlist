@@ -6,7 +6,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PlaylistRoutingModule } from './playlistRouting.module';
-import { PlaylistComponent, AlbumsComponent } from './components';
+import { AlbumComponent, SearchResultsComponent, ArtistComponent, PlaylistTracksComponent } from './components';
+import { PlaylistComponent } from './playlist.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,10 @@ import { PlaylistComponent, AlbumsComponent } from './components';
   ],
   declarations: [
     PlaylistComponent,
-    AlbumsComponent
+    SearchResultsComponent,
+    ArtistComponent,
+    AlbumComponent,
+    PlaylistTracksComponent
   ],
   providers: []
 })

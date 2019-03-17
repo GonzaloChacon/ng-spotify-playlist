@@ -2,5 +2,7 @@
  * Gonzalo Chacón
  */
 
-export * from './playlist/playlist.component';
-export * from './albums/albums.component';
+export * from './searchResults/searchResults.component';
+export * from './album/album.component';
+export * from './artist/artist.component';
+export * from './playlistTracks/playlistTracks.component';
