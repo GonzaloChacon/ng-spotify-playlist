@@ -89,3 +89,91 @@
        url('./assets/fonts/lora-v13-latin-700.ttf') format('truetype'), /* Safari, Android, iOS */
        url('./assets/fonts/lora-v13-latin-700.svg#Lora') format('svg'); /* Legacy iOS */
 }
+/* Icomoon */
+@font-face {
+  font-family: 'icomoon';
+  src:  url('./assets/fonts/icomoon.eot?55gicx');
+  src:  url('./assets/fonts/icomoon.eot?55gicx#iefix') format('embedded-opentype'),
+    url('./assets/fonts/icomoon.ttf?55gicx') format('truetype'),
+    url('./assets/fonts/icomoon.woff?55gicx') format('woff'),
+    url('./assets/fonts/icomoon.svg?55gicx#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-alert-circle:before {
+  content: "\e900";
+}
+.icon-alert-triangle:before {
+  content: "\e901";
+}
+.icon-align-justify:before {
+  content: "\e902";
+}
+.icon-check-square:before {
+  content: "\e903";
+}
+.icon-check:before {
+  content: "\e904";
+}
+.icon-chevron-down:before {
+  content: "\e905";
+}
+.icon-chevron-left:before {
+  content: "\e906";
+}
+.icon-chevron-right:before {
+  content: "\e907";
+}
+.icon-chevron-up:before {
+  content: "\e908";
+}
+.icon-clock:before {
+  content: "\e909";
+}
+.icon-edit-2:before {
+  content: "\e90a";
+}
+.icon-github:before {
+  content: "\e90b";
+}
+.icon-headphones:before {
+  content: "\e90c";
+}
+.icon-help-circle:before {
+  content: "\e90d";
+}
+.icon-linkedin:before {
+  content: "\e90e";
+}
+.icon-list:before {
+  content: "\e90f";
+}
+.icon-log-in:before {
+  content: "\e910";
+}
+.icon-menu:before {
+  content: "\e912";
+}
+.icon-more-horizontal:before {
+  content: "\e914";
+}
+.icon-music:before {
+  content: "\e911";
+}
+.icon-trash-2:before {
+  content: "\e913";
+}

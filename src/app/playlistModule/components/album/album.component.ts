@@ -35,7 +35,9 @@ export class AlbumComponent implements OnInit, OnDestroy {
       )
       .subscribe(params => {
         this._spotifyService.getAlbum(params['albumId'])
-          .subscribe((resp: any) => this.album = resp);
+          .subscribe((resp: any) => {
+            this.album = resp;
+          });
       });
   }
 

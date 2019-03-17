@@ -1,9 +1,13 @@
-<section class="playlist-tracks">
+<section class="playlist-tracks-component">
   <div
     *ngFor="let track of tracks"
     class="track {{ track.dislpay && 'display' }}">
     <!-- TODO: for some reason ngClass is not working here, check why -->
-    <span class="track-name">{{ track.name }}</span>
-    <span>Album: <a routerLink="/playlist/album/{{track.album.id}}"> {{track.album.name}} </a></span>
+    <span class="track-name">
+      <i class="icon-music"></i> {{ track.name }}
+    </span>
+    <span>
+      <a routerLink="/playlist/album/{{track.album.id}}">{{track.album.name}}</a> &#8226; <a routerLink="/playlist/artist/{{track.album.artists[0].id}}">{{track.album.artists[0].name}}</a>
+    </span>
   </div>
 </section>

@@ -1,0 +1,99 @@
+.album-component {
+  height: 100vh;
+  overflow: scroll;
+  padding: 15px 35px;
+
+  .album {
+    img {
+      width: 200px;
+    }
+  }
+
+  .track {
+    border-bottom: 1px solid $color-green-1;
+    padding: 10px 0;
+    position: relative;
+
+    &:last-of-type {
+      border-bottom: 0;
+    }
+
+    > span {
+      display: block;
+    }
+
+    &-name {
+      font-family: $font-title;
+      line-height: 1.7rem;
+      padding-bottom: 3px;
+      position: relative;
+
+      i {
+        color: $color-primary;
+        padding-right: 5px;
+      }
+    }
+
+    &-actions {
+      position: absolute;
+      right: 0;
+
+      &-list {
+        bottom: 20px;
+        display: none;
+        position: absolute;
+        right: 0;
+        width: auto;
+        z-index: 2;
+      }
+
+      i {
+        color: $color-primary;
+        cursor: pointer;
+      }
+
+      a {
+        background: rgba($color-font, 0.68);
+        cursor: pointer;
+        display: block;
+        padding: 5px 10px;
+        width: 200px;
+      }
+
+      a:first-of-type {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+      }
+
+      a:last-of-type {
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+
+      a:hover {
+        background: $color-font;
+      }
+
+      &:hover .track-actions-list {
+        display: block;
+      }
+    }
+
+    > span:not(.track-name) {
+      color: $color-font-light;
+      font-size: 1.1rem;
+      line-height: 1.4rem;
+      padding-left: 20px;
+    }
+
+    a {
+      color: $color-font-light;
+      text-decoration: none;
+      transition: color .2s ease-in-out;
+
+      &:hover {
+        color: $color-primary;
+      }
+    }
+  }
+}

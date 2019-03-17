@@ -3,19 +3,22 @@
   height: 100vh;
 
   &-content {
-    background: #777;
     flex-grow: 1;
   }
 
   &-aside {
+    background: $color-gray-1;
     box-shadow: 0px 0px 6px $color-font;
+    margin: 0;
     padding: 0;
     width: 210px;
-    margin: 0;
+    z-index: 1;
   }
 
   &-tracks {
+    background: $color-gray-1;
     width: 0;
+
     &.open {
       transition: width 0.2s ease-in-out;
       width: 340px;
@@ -29,7 +32,7 @@
   &-item{
     border-bottom: 1px solid $color-green-1;
     cursor: pointer;
-    height: 42px;
+    height:39px;
     overflow: hidden;
     padding: 10px 15px;
     position: relative;
@@ -59,29 +62,22 @@
 
     h4 {
       color: rgba($color-font, 0.68);
-      font-size: 1.8rem;
+      font-size: 1.6rem;
       left: 20px;
       margin: 0;
     }
 
     p {
-      padding: 0 5p;
+      padding: 0;
       position: relative;
       transform: translateY(350px);
       transition: transform .3s .2s cubic-bezier(0.455, 0.030, 0.515, 0.955);
 
       span {
+        color: $color-font-light;
         display: block;
+        line-height: 1.7rem;
         margin: 0;
-      }
-
-      span:nth-child(2) {
-        font-size: 1.2rem;
-        margin: 4px 0px;
-      }
-
-      span:nth-child(3) {
-        font-size: 1.1rem;
       }
     }
   }

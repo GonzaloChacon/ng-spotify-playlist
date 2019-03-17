@@ -53,7 +53,7 @@
         *ngFor="let playlist of playlists; index as i"
         [ngClass]="{'open': playlistId === playlist.id}"
         (click)="playlistId = playlist.id">
-        <h4>{{ playlist.name }}</h4>
+        <h4><i class="icon-headphones"></i> {{ playlist.name }}</h4>
 
         <p>
           <span>Tracks <b>{{ playlist.tracks.total }}</b></span>
@@ -61,7 +61,7 @@
           <a
             class="btn btn-gray btn-small"
             *ngIf="playlist.owner.id === user.id">
-            Detele playlist <i class="far fa-trash-alt"></i>
+            Detele playlist <i class="icon-trash-2"></i>
           </a>
         </p>
       </div>

@@ -1,1 +1,27 @@
-<div *ngIf="album">ALBUM {{album.id}}</div>
+<section
+  class="album-component"
+  *ngIf="album">
+  <div class="album">
+    <img src="{{album.images[0].url}}">
+    <h5>{{ album.name }}</h5>
+    <span>{{ album.artists[0].name }}</span>
+    <span>Tracks <b>{{ album.tracks.total }}</b></span>
+  </div>
+
+  <div
+    *ngFor="let track of album.tracks.items"
+    class="track {{ track.dislpay && 'display' }}">
+    <!-- TODO: for some reason ngClass is not working here, check why -->
+    <span class="track-name">
+      <i class="icon-music"></i> {{ track.name }}
+
+      <span class="track-actions">
+        <span class="track-actions-list">
+          <a>Add to list</a>
+          <a>Add to list</a>
+        </span>
+        <i class="icon-more-horizontal"></i>
+      </span>
+    </span>
+  </div>
+</section>

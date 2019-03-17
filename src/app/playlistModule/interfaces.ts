@@ -27,10 +27,22 @@ export interface IAlbum {
   external_urls: {
     spotify: string
   }
+  genres?: string[]
   href: string
   id: string
   images: IImage[]
+  label?: string
   name: string
+  popularity?: number
+  tracks?: {
+    href: string
+    items: ITrack[]
+    limit: number
+    next: string
+    offset: number
+    previous: string
+    total: number
+  }
   release_date: string
   release_date_precision: string
   total_tracks: number

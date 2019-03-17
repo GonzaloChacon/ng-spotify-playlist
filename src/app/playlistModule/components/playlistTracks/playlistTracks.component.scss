@@ -1,4 +1,4 @@
-.playlist-tracks {
+.playlist-tracks-component {
   height: 100vh;
   overflow: scroll;
   padding: 15px 35px;
@@ -27,11 +27,28 @@
       font-family: $font-title;
       padding-bottom: 3px;
       line-height: 1.7rem;
+
+      i {
+        color: $color-primary;
+        padding-right: 5px;
+      }
     }
 
     span:not(.track-name) {
+      color: $color-font-light;
       font-size: 1.1rem;
       line-height: 1.4rem;
+      padding-left: 20px;
+    }
+
+    a {
+      color: $color-font-light;
+      text-decoration: none;
+      transition: color .2s ease-in-out;
+
+      &:hover {
+        color: $color-primary;
+      }
     }
   }
 }

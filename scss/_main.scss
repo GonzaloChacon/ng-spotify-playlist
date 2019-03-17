@@ -10,10 +10,11 @@ html {
 
 html,
 body {
-  background: $color-gray-1;
+  background-image: url('./assets/img/bg_body.jpg');
+  background-size: cover;
   color: $color-font;
   font-family: $font-sans;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   -webkit-print-color-adjust: exact;
 }
 
