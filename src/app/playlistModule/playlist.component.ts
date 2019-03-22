@@ -7,12 +7,14 @@ import { Subject } from 'rxjs';
 import { takeUntil, debounceTime } from 'rxjs/operators';
 import { StoreService, Store, Event } from '@app/core/services';
 import { SpotifyService } from '@app/playlistModule/services';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ITrack, IPlaylist, IOwner } from '@app/playlistModule/interfaces';
+import { objCloneDeep } from '@app/core/utils/utils';
 
 export interface IPlaylistEvent {
-  action: string,
+  action: string
   track: ITrack
+  playlist: any
 }
 
 @Component({
@@ -22,19 +24,22 @@ export interface IPlaylistEvent {
 export class PlaylistComponent implements OnInit, OnDestroy {
   private _destroy: Subject<boolean> = new Subject<boolean>();
 
-  playlistStore: Store;
+  newPlaylist = false;
+
+  spotifyStore: Store;
   searchEvent: Event;
   playlistEvent: Event;
   user: IOwner;
-  playlistId: string;
-
+  currentPlaylist: IPlaylist;
   playlists: IPlaylist[] = [];
 
   searchForm: FormGroup = new FormGroup({
-    search: new FormControl(null),
-    artists: new FormControl(true),
-    albums: new FormControl(true),
-    tracks: new FormControl(true)
+    search: new FormControl(null)
+  });
+
+  playlistForm: FormGroup = new FormGroup({
+    name: new FormControl(null, [Validators.required]),
+    public: new FormControl(false)
   });
 
   constructor(
@@ -43,7 +48,13 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.playlistStore = this._storeService.getStore('playlist');
+    this.spotifyStore = this._storeService.getStore('spotify');
+
+    this.spotifyStore.emitter
+      .pipe(takeUntil(this._destroy))
+      .subscribe(state => {
+        this.playlists = state.playlists;
+      });
 
     /*
      * Components loaded through the router-outlet can't bind values
@@ -61,18 +72,16 @@ export class PlaylistComponent implements OnInit, OnDestroy {
         this.getPalylists();
       });
 
-    this.playlistStore.emitter
-      .pipe(takeUntil(this._destroy))
-      .subscribe(state => {
-        this.playlists = state;
-      });
-
     this.searchForm.valueChanges
       .pipe(takeUntil(this._destroy))
       .pipe(debounceTime(500))
       .subscribe(searchValues => {
         this.searchEvent.emit(searchValues);
       });
+
+    this.playlistEvent.emitter.subscribe(playload => {
+      this.updatePlaylist(playload);
+    });
 
     this._storeService.emitEvent('loading', false);
   }
@@ -82,6 +91,8 @@ export class PlaylistComponent implements OnInit, OnDestroy {
       .subscribe(playlists => {
         this.playlists = playlists;
         this.playlists.forEach(this.displayPlaylist);
+
+        this.spotifyStore.update({ playlists: this.playlists });
       });
   }
 
@@ -92,22 +103,81 @@ export class PlaylistComponent implements OnInit, OnDestroy {
     }, (i * 250));
   }
 
-  updatePlaylist({ action, track }: IPlaylistEvent) {
+  updatePlaylist({ action, playlist, track }: IPlaylistEvent) {
+    let currentPlaylist: IPlaylist;
+    let playlistIndex: number;
+    const playlists = this.playlists.map(item => objCloneDeep({}, item));
+
+    if (playlist.id) {
+      playlistIndex = this.playlists.findIndex(item => item.id === playlist.id);
+      currentPlaylist = playlists[playlistIndex];
+    }
+
     switch (action) {
+
       case 'DELETE_TRACK': {
-        delete this.playlists[track.id];
+        const body = {
+          tracks: [{ uri: track.uri }]
+        };
+
+        this._spotifyService.deletePlaylistTrack(body, playlist.id)
+          .subscribe(() => {
+            const index = currentPlaylist.tracks.items.findIndex(item => item.id === track.id);
+            /*
+             * We set this value in order to make the animaiton of the track leaving,
+             * after it's gone we remove the track from the list.
+             */
+            track.remove = true;
+            setTimeout(() => {
+              currentPlaylist.tracks.items.splice(index, 1);
+
+              this.spotifyStore.update({ playlists });
+            }, 500);
+          });
+
         break;
       }
 
       case 'ADD_TRACK': {
-        if (!this.playlists[track.id]) {
-          this.playlists[track.id] = track;
-        }
+        this._spotifyService.addPlaylistTrack(track.uri, playlist.id)
+          .subscribe(() => {
+            if (currentPlaylist.tracks.items && currentPlaylist.tracks.items.findIndex(item => item.id === track.id) === -1) {
+              currentPlaylist.tracks.items.push(track);
+            }
+
+            this.spotifyStore.update({ playlists });
+          });
+
         break;
       }
-    }
 
-    this.playlistStore.update(this.playlists);
+      case 'CREATE_PLAYLIST': {
+        this._spotifyService.createPlaylist(this.user.id, playlist)
+          .subscribe((newPlaylist: IPlaylist) => {
+            playlists.push(newPlaylist);
+
+            this.spotifyStore.update({ playlists });
+          });
+
+        break;
+      }
+
+      case 'REMOVE_PLAYLIST': {
+        this._spotifyService.unfollowPlaylist(playlist.id)
+          .subscribe(() => {
+            /*
+             * We set this value in order to make the animaiton of the track leaving,
+             * after it's gone we remove the track from the list.
+             */
+            this.playlists[playlistIndex].remove = true;
+            setTimeout(() => {
+              playlists.splice(playlistIndex, 1);
+
+              this.spotifyStore.update({ playlists });
+            }, 500);
+          });
+      }
+    }
   }
 
   ngOnDestroy(): void {

@@ -1,13 +1,18 @@
 <section class="playlist-tracks-component">
   <div
-    *ngFor="let track of tracks"
-    class="track {{ track.dislpay && 'display' }}">
+    *ngFor="let track of tracks;index as i"
+    class="track {{ track.dislpay && 'display' }} {{ track.remove && 'remove' }}">
     <!-- TODO: for some reason ngClass is not working here, check why -->
     <span class="track-name">
       <i class="icon-music"></i> {{ track.name }}
     </span>
     <span>
       <a routerLink="/playlist/album/{{track.album.id}}">{{track.album.name}}</a> &#8226; <a routerLink="/playlist/artist/{{track.album.artists[0].id}}">{{track.album.artists[0].name}}</a>
+      <a
+        class="btn btn-red"
+        (click)="deleteTrack(track, i)">
+        <i class="icon-trash-2"></i>
+      </a>
     </span>
   </div>
 </section>

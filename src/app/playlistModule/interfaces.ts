@@ -21,16 +21,16 @@ export interface IArtist {
 }
 
 export interface IAlbum {
-  album_type: string
+  album_type?: string
   artists: IArtist[]
-  available_markets: string[]
-  external_urls: {
+  available_markets?: string[]
+  external_urls?: {
     spotify: string
   }
   genres?: string[]
-  href: string
+  href?: string
   id: string
-  images: IImage[]
+  images?: IImage[]
   label?: string
   name: string
   popularity?: number
@@ -43,11 +43,11 @@ export interface IAlbum {
     previous: string
     total: number
   }
-  release_date: string
-  release_date_precision: string
-  total_tracks: number
-  type: string
-  uri: string
+  release_date?: string
+  release_date_precision?: string
+  total_tracks?: number
+  type?: string
+  uri?: string
 }
 
 export interface ITrack {
@@ -84,9 +84,14 @@ export interface IImage {
 
 export interface IPlaylist {
   collaborative: boolean
+  description?: string
   dislpay?: boolean
   external_urls: {
     spotify: string
+  }
+  followers: {
+    href: string
+    total: number
   }
   href: string
   id: string
@@ -100,7 +105,7 @@ export interface IPlaylist {
   tracks: {
     href: string
     total: number
-    list?: ITrack[]
+    items?: ITrack[]
   }
   type: string
   uri: string

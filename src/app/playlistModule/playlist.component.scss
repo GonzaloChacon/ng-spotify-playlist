@@ -1,43 +1,44 @@
 .module {
   display: flex;
   height: 100vh;
+  padding-bottom: 30px;
 
   &-content {
     flex-grow: 1;
+    overflow: auto;
   }
 
   &-aside {
     background: $color-gray-1;
-    box-shadow: 0px 0px 6px $color-font;
     margin: 0;
-    padding: 0;
-    width: 210px;
+    padding: 15px;
+    width: 280px;
     z-index: 1;
   }
 
   &-tracks {
-    background: $color-gray-1;
-    width: 0;
-
-    &.open {
-      transition: width 0.2s ease-in-out;
-      width: 340px;
-    }
+    background: darken($color-gray-1, 3%);
+    overflow: auto;
+    animation: slide-panel .2s ease-in-out forwards;
+    width: 340px;
   }
 }
 
 
 // Playlists aside component
 .playlists {
+
   &-item{
     border-bottom: 1px solid $color-green-1;
     cursor: pointer;
-    height:39px;
+    height: 0;
     overflow: hidden;
-    padding: 10px 15px;
+    padding: 0;
     position: relative;
-    transform: translateX(-200px);
-    transition: height .3s .2s cubic-bezier(0.455, 0.030, 0.515, 0.955), transform .2s .1s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+    transform: translateX(-250px);
+    transition:
+      height .2s .0s cubic-bezier(0.455, 0.030, 0.515, 0.955),
+      transform .2s .1s cubic-bezier(0.455, 0.030, 0.515, 0.955);
     width: 100%;
 
     &:last-of-type {
@@ -45,7 +46,12 @@
     }
 
     &.display {
+      height: 39px;
       transform: translateX(0);
+    }
+
+    &.remove {
+      animation: slide-off 300ms ease-in-out forwards;
     }
 
     &.open {
@@ -65,10 +71,12 @@
       font-size: 1.6rem;
       left: 20px;
       margin: 0;
+      padding: 10px 15px;
     }
 
     p {
-      padding: 0;
+      padding: 0 15px;
+      margin-top: 0;
       position: relative;
       transform: translateY(350px);
       transition: transform .3s .2s cubic-bezier(0.455, 0.030, 0.515, 0.955);
@@ -82,19 +90,22 @@
     }
   }
 
+  &-new {
+    transform: translateX(-400px);
+    animation: slide-panel .4s ease-in-out forwards;
+  }
+
   &-tracks {
     padding: 10px 15px;
   }
 }
-
-@keyframes co-open {
+// end Playlists aside component
+@keyframes slide-panel {
   0% {
-    max-height: 0;
+    transform: translateX(-400px);
   }
 
   100% {
-    max-height: 1000px;
-    overflow: initial;
+    transform: translateX(0);
   }
 }
-// end Playlists aside component

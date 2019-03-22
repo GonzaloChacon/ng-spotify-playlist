@@ -11,27 +11,30 @@ export function isObject(item) {
 }
 
 /**
- * @method mergeDeep(): Deep merge two objects, mainly used to update Store objects.
+ * @method objCloneDeep(): Deep merge two objects, mainly used to update Store objects.
  * @param target
  * @param ...sources
  */
-export function mergeDeep(target, source) {
-  const output = Object.assign({}, target);
+export function objCloneDeep(target, source) {
+  let res: any;
 
   if (isObject(target) && isObject(source)) {
+    res = Object.assign({}, target);
+
     Object.keys(source).forEach(key => {
       if (isObject(source[key])) {
         if (!(key in target)) {
-          Object.assign(output, { [key]: source[key] });
+          Object.assign(res, { [key]: source[key] });
         } else {
-          output[key] = mergeDeep(target[key], source[key]);
+          res[key] = objCloneDeep(target[key], source[key]);
         }
       } else {
-        Object.assign(output, { [key]: source[key] });
+        Object.assign(res, { [key]: source[key] });
       }
     });
   }
-  return output;
+
+  return res;
 }
 
 /**
@@ -94,7 +97,6 @@ export function isEqual(value, other): boolean {
   }
 
   // If nothing failed, return true
-
   return true;
 }
 

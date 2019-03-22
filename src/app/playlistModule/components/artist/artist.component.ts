@@ -6,8 +6,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { SpotifyService } from '@app/playlistModule/services';
-import { ITrack, IArtist } from '@app/playlistModule/interfaces';
-import { StoreService, Event } from '@app/core/services';
+import { IArtist } from '@app/playlistModule/interfaces';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -22,13 +21,10 @@ export class ArtistComponent implements OnInit, OnDestroy {
 
   constructor(
     private _spotifyService: SpotifyService,
-    private _storeService: StoreService,
     private _activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    this.playlistEvent = this._storeService.getEvent('updatePlaylist');
-
     this._activatedRoute.params
       .pipe(
         takeUntil(this._destroy)
@@ -37,13 +33,6 @@ export class ArtistComponent implements OnInit, OnDestroy {
         this._spotifyService.getArtist(params['artistId'])
           .subscribe((resp: any) => this.artist = resp);
       });
-  }
-
-  addTrack(track: ITrack) {
-    this.playlistEvent.emit({
-      action: 'ADD_TRACK',
-      track
-    });
   }
 
   ngOnDestroy(): void {

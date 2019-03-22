@@ -1,0 +1,13 @@
+@keyframes slide-off {
+  0% {
+    max-height: 200px;
+    transform: translateX(0);
+    padding: 10px 0;
+  }
+
+  100% {
+    max-height: 0;
+    transform: translateX(-400px);
+    padding: 0;
+  }
+}

@@ -24,6 +24,6 @@ export class AppComponent implements OnInit {
         this.loading = state;
       });
 
-    this._storeService.createStore('playlist', []);
+    this._storeService.createStore('spotify', { playlists: [] });
   }
 }

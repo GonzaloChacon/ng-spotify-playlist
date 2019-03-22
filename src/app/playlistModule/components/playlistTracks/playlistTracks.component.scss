@@ -1,6 +1,4 @@
 .playlist-tracks-component {
-  height: 100vh;
-  overflow: scroll;
   padding: 15px 35px;
 
   .track {
@@ -10,6 +8,7 @@
     position: relative;
     transform: translateX(-400px);
     transition: transform .3s .2s cubic-bezier(0.455, 0.030, 0.515, 0.955);
+    transform-origin: top left !important;
 
     &:last-of-type {
       border-bottom: 0;
@@ -21,6 +20,10 @@
 
     &.display {
       transform: translateX(0);
+    }
+
+    &.remove {
+      animation: slide-off 300ms ease-in-out forwards;
     }
 
     &-name {

@@ -1,6 +1,13 @@
 # [WIP] Ng Spotify Playlist
 
-NOTE: This is a work in progress, just started and far from finished. I'm just playing around with the Spotify API and also messing around with some javascript :)
+NOTE: This is a work in progress, just started and far from finished.
+I'm just playing around with the Spotify API and also messing around with some javascript :)
+
+TODO:
+- Artist and search result components
+- Start creating a UI for both desktop and mobile
+- Unit Tests
+- ...SOME MORE STUFF I DON'T KNOW YET!
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.1.
 

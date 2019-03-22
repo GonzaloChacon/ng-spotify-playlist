@@ -38,14 +38,17 @@ export class SpotifyService {
     return this._api.get(`${this._endpoint}/albums/${id}`);
   }
 
-  // Playlists
   getAllPlaylists(userId: string): Observable<IPlaylist[]> {
     return this._api.get(`${this._endpoint}/users/${userId}/playlists`)
       .pipe(map(res => res.items));
   }
 
-  createPlaylist(body: {description: string, name: string, public: boolean}): Observable<any> {
-    return this._api.post(`${this._endpoint}/playlists`, body);
+  createPlaylist(userId: string, body: {description: string, name: string, public: boolean}): Observable<any> {
+    return this._api.post(`${this._endpoint}/users/${userId}/playlists`, body);
+  }
+
+  unfollowPlaylist(playlistId: string): Observable<any> {
+    return this._api.delete(`${this._endpoint}/playlists/${playlistId}/followers`);
   }
 
   getPlaylistTracks(userId: string, playlistId: string): Observable<ITrack[]> {
@@ -54,17 +57,16 @@ export class SpotifyService {
         map(({ items }) => {
           const res = [];
           items.forEach((item: any) => res.push(item.track));
-
           return res;
         })
       );
   }
 
-  addPlaylistTrack(uris: string, playlist_id: string): Observable<any> {
-    return this._api.post(`${this._endpoint}/playlists/${playlist_id}/tracks?uris=${uris}`, null);
+  addPlaylistTrack(uris: string, playlistId: string): Observable<any> {
+    return this._api.post(`${this._endpoint}/playlists/${playlistId}/tracks?uris=${uris}`, null);
   }
 
-  deletePlaylistTrack(body: {}, playlist_id: string): Observable<any> {
-    return this._api.delete(`${this._endpoint}/playlists/${playlist_id}/tracks`, body);
+  deletePlaylistTrack(body: {}, playlistId: string): Observable<any> {
+    return this._api.delete(`${this._endpoint}/playlists/${playlistId}/tracks`, body);
   }
 }

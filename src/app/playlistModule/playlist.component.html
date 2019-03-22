@@ -11,35 +11,6 @@
           formControlName="search"
           placeholder="Search for"/>
       </fieldset>
-
-      <fieldset>
-        <label for="artists">
-          <input
-            id="artists"
-            name="artists"
-            type="checkbox"
-            formControlName="artists"/>
-          Artists
-        </label>
-
-        <label for="albums">
-          <input
-            id="albums"
-            name="albums"
-            type="checkbox"
-            formControlName="albums"/>
-          Albums
-        </label>
-
-        <label for="tracks">
-          <input
-            id="tracks"
-            name="tracks"
-            type="checkbox"
-            formControlName="tracks"/>
-          Tracks
-        </label>
-      </fieldset>
     </form>
     <!-- end Search -->
 
@@ -49,10 +20,10 @@
       class="playlists"
       *ngIf="playlists">
       <div
-        class="playlists-item {{ playlist.dislpay && 'display' }}"
+        class="playlists-item {{ playlist.dislpay && 'display' }} {{ playlist.remove && 'remove' }}"
         *ngFor="let playlist of playlists; index as i"
-        [ngClass]="{'open': playlistId === playlist.id}"
-        (click)="playlistId = playlist.id">
+        [ngClass]="{'open': currentPlaylist && currentPlaylist.id === playlist.id}"
+        (click)="currentPlaylist = playlist">
         <h4><i class="icon-headphones"></i> {{ playlist.name }}</h4>
 
         <p>
@@ -60,22 +31,68 @@
           <span>Owner <b>{{ playlist.owner.display_name }}</b></span>
           <a
             class="btn btn-gray btn-small"
-            *ngIf="playlist.owner.id === user.id">
-            Detele playlist <i class="icon-trash-2"></i>
+            *ngIf="playlist.owner.id === user.id"
+            (click)="updatePlaylist({
+              action: 'REMOVE_PLAYLIST',
+              playlist: playlist
+            })">
+            Remove playlist <i class="icon-trash-2"></i>
           </a>
         </p>
       </div>
+
+      <a
+        class="btn btn-green"
+        *ngIf="!newPlaylist"
+        (click)="newPlaylist = !newPlaylist">
+        New playlist
+      </a>
+
+      <!-- Create Playlist -->
+      <form
+        class="playlists-new"
+        *ngIf="newPlaylist"
+        [formGroup]="playlistForm"
+        (ngSubmit)="updatePlaylist({
+          action: 'CREATE_PLAYLIST',
+          playlist: playlistForm.value
+        })">
+        <fieldset>
+          <input
+            type="text"
+            name="name"
+            formControlName="name"
+            placeholder="Name your playlist :)"/>
+
+          <button
+            class="btn btn-green btn-icon">
+            <i class="icon-check"></i>
+          </button>
+        </fieldset>
+
+        <fieldset>
+          <label for="public">
+            <input
+              id="public"
+              name="public"
+              type="checkbox"
+              formControlName="public"/>
+            Make private
+          </label>
+        </fieldset>
+      </form>
+      <!-- end Create Playlist -->
+
     </section>
     <!-- end Playlists -->
   </div>
 
   <!-- Tracks -->
   <app-playlist-tracks
-    *ngIf="playlists"
+    *ngIf="currentPlaylist"
     class="module-tracks"
-    [ngClass]="{'open': playlistId}"
     [user]="user"
-    [playlistId]="playlistId">
+    [playlist]="currentPlaylist">
   </app-playlist-tracks>
   <!-- end Tracks -->
 

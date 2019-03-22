@@ -34,3 +34,23 @@ h1, h2, h3, h4, h5, h6 {
 .serif {
   font-family: $font-serif !important;
 }
+
+.main-footer {
+  background: $color-font;
+  height: 30px;
+  margin-top: -30px;
+  padding: 6px 15px;
+
+  a {
+    color: $color-gray-2;
+    float: right;
+    text-decoration: none;
+    font-size: 1.6rem;
+    padding: 0 5px;
+    transition: color 200ms ease-in-out;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}

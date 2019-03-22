@@ -10,18 +10,22 @@
 
   <div
     *ngFor="let track of album.tracks.items"
-    class="track {{ track.dislpay && 'display' }}">
+    class="track {{ track.dislpay && 'display' }}"
+    #item{{i}}>
     <!-- TODO: for some reason ngClass is not working here, check why -->
     <span class="track-name">
       <i class="icon-music"></i> {{ track.name }}
+    </span>
 
-      <span class="track-actions">
-        <span class="track-actions-list">
-          <a>Add to list</a>
-          <a>Add to list</a>
-        </span>
-        <i class="icon-more-horizontal"></i>
+    <span class="track-actions">
+      <span class="track-actions-list">
+        <a
+          *ngFor="let playlist of playlists"
+          (click)="addToPlaylist(playlist.id, track)">
+          Add to list {{ playlist.name }}
+        </a>
       </span>
+      <i class="icon-more-horizontal"></i>
     </span>
   </div>
 </section>

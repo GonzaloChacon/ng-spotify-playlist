@@ -9,7 +9,7 @@
 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable,  Subject } from 'rxjs';
-import { mergeDeep } from '../utils/utils';
+import { objCloneDeep } from '../utils/utils';
 
 export class Store {
   private storeEmmiter: BehaviorSubject<any>;
@@ -23,7 +23,7 @@ export class Store {
   }
 
   async update(state: any) {
-    this.state = await mergeDeep(this.state, state);
+    this.state = await objCloneDeep(this.state, state);
     this.storeEmmiter.next(this.state);
   }
 

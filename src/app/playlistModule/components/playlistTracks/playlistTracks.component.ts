@@ -4,7 +4,7 @@
 
 import { Component, OnInit, Input } from '@angular/core';
 import { SpotifyService } from '@app/playlistModule/services';
-import { ITrack, IOwner } from '@app/playlistModule/interfaces';
+import { ITrack, IOwner, IPlaylist } from '@app/playlistModule/interfaces';
 import { StoreService, Event } from '@app/core/services';
 
 @Component({
@@ -14,13 +14,15 @@ import { StoreService, Event } from '@app/core/services';
 export class PlaylistTracksComponent implements OnInit {
 
   @Input('user') user: IOwner;
-  @Input('playlistId') set playlistId(id: string) {
-    if (id) {
-      this.getTracks(id);
+  @Input('playlist') set currentPlaylist(playlist: IPlaylist) {
+    if (playlist) {
+      this.playlist = playlist;
+      this.getTracks();
     }
   }
 
   playlistEvent: Event;
+  playlist: IPlaylist;
   tracks: ITrack[];
 
   constructor(
@@ -32,10 +34,10 @@ export class PlaylistTracksComponent implements OnInit {
     this.playlistEvent = this._storeService.getEvent('updatePlaylist');
   }
 
-  getTracks(id: string) {
-    this._spotifyService.getPlaylistTracks(this.user.id, id)
+  getTracks() {
+    this._spotifyService.getPlaylistTracks(this.user.id, this.playlist.id)
       .subscribe((tracks: ITrack[]) => {
-        this.tracks = tracks;
+        this.playlist.tracks.items = this.tracks = tracks;
         this.tracks.forEach(this.displayTrack);
       });
   }
@@ -47,10 +49,13 @@ export class PlaylistTracksComponent implements OnInit {
     }, (i * 50));
   }
 
-  addTrack(track: ITrack) {
+  deleteTrack(track: ITrack) {
     this.playlistEvent.emit({
-      action: 'ADD_TRACK',
-      track
+      action: 'DELETE_TRACK',
+      track,
+      playlist: {
+        id: this.playlist.id
+      }
     });
   }
 }
