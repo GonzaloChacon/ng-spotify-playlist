@@ -2,56 +2,6 @@
   padding: 15px 35px;
 
   .track {
-    border-top: 1px solid $color-green-1;
-    overflow: hidden;
-    padding: 10px 0;
-    position: relative;
     transform: translateX(-400px);
-    transition: transform .3s .2s cubic-bezier(0.455, 0.030, 0.515, 0.955);
-    transform-origin: top left !important;
-
-    &:first-of-type {
-      border-top: 0;
-    }
-
-    span {
-      display: block;
-    }
-
-    &.display {
-      transform: translateX(0);
-    }
-
-    &.remove {
-      animation: slide-off 300ms ease-in-out forwards;
-    }
-
-    &-name {
-      font-family: $font-title;
-      padding-bottom: 3px;
-      line-height: 1.7rem;
-
-      i {
-        color: $color-primary;
-        padding-right: 5px;
-      }
-    }
-
-    span:not(.track-name) {
-      color: $color-font-light;
-      font-size: 1.1rem;
-      line-height: 1.4rem;
-      padding-left: 20px;
-    }
-
-    a {
-      color: $color-font-light;
-      text-decoration: none;
-      transition: color .2s ease-in-out;
-
-      &:hover {
-        color: $color-primary;
-      }
-    }
   }
 }

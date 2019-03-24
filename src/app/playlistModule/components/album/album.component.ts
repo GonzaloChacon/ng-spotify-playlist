@@ -31,7 +31,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.playlistEvent = this._storeService.getEvent('updatePlaylist');
 
-    this._storeService.getStore('spotify').emitter
+    this._storeService.listenTo('store', 'spotify')
       .pipe(takeUntil(this._destroy))
       .subscribe(({ playlists }: { playlists: IPlaylist[] }) => {
         this.playlists = playlists.filter(playlist => playlist.public);
@@ -41,8 +41,9 @@ export class AlbumComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._destroy))
       .subscribe(params => {
         this._spotifyService.getAlbum(params['albumId'])
-          .subscribe((resp: IAlbum) => {
-            this.album = resp;
+          .subscribe((album: IAlbum) => {
+            album.tracks.items.forEach(this.displayTrack);
+            this.album = album;
           });
       });
   }
@@ -78,6 +79,14 @@ export class AlbumComponent implements OnInit, OnDestroy {
         id: playlistId
       }
     });
+  }
+
+  displayTrack(track: ITrack, i: number) {
+    if (!track.display) {
+      setTimeout(() => {
+        track.display = true;
+      }, (i * 50));
+    }
   }
 
   ngOnDestroy(): void {

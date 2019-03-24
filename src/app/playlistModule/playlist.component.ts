@@ -92,7 +92,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
       .subscribe(playlists => {
 
         playlists.forEach((playlist: IPlaylist, i: number) => {
-          this.getPlaylistTracks(playlist)<
+          this.getPlaylistTracks(playlist);
           this.slideInPlaylist(playlist, i);
         });
 
@@ -119,6 +119,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
 
   slideInPlaylist(playlist: IPlaylist, i: number) {
     playlist.display = false;
+    
     setTimeout(() => {
       playlist.display = true;
     }, (i * 250));

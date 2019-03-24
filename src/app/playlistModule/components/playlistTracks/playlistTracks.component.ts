@@ -15,7 +15,7 @@ export class PlaylistTracksComponent implements OnInit {
    * TODO: Angular change detection doesn't recognize changes within arrays,
    * only changes to the array reference. When a new track is added to the
    * playlist, it's not reflected in the template.
-   * The binding to "playlistLength" has no other purpose to be able to detect
+   * The binding to 'playlistLength' has no other purpose to be able to detect
    * when the playlist length changes and update the template.
    * 
    * Since the component is staleles, it will work for now, but check for

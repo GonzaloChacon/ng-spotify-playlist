@@ -83,32 +83,32 @@ export interface IImage {
 }
 
 export interface IPlaylist {
-  collaborative: boolean
+  collaborative?: boolean
   description?: string
   display?: boolean
-  external_urls: {
+  external_urls?: {
     spotify: string
   }
-  followers: {
+  followers?: {
     href: string
     total: number
   }
-  href: string
-  id: string
-  images: IImage[]
-  name: string
-  owner: IOwner
-  primary_color: string
-  public: boolean
+  href?: string
+  id?: string
+  images?: IImage[]
+  name?: string
+  owner?: IOwner
+  primary_color?: string
+  public?: boolean
   remove?: boolean
-  snapshot_id: string
-  tracks: {
+  snapshot_id?: string
+  tracks?: {
     href: string
     total: number
     items?: ITrack[]
   }
-  type: string
-  uri: string
+  type?: string
+  uri?: string
 }
 
 export interface IOwner {

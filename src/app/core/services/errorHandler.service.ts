@@ -25,7 +25,6 @@ export class AppErrorHandler implements ErrorHandler {
       this._authService = this._injector.get<AuthService>(AuthService);
     }
 
-    debugger
     if (error.status === 401) {
       this._notificationsService.add('error', 'Session has expired, please log in again.');
       this._authService.logout();

@@ -15,14 +15,12 @@
     <section
       *ngFor="let track of album.tracks.items;index as trackI"
       class="track {{ track.display && 'display' }}"
-      #item{{trackI}}>
+      [ngClass]="{'open-actions': options === trackI}">
       <span class="track-name">
         <i class="icon-music"></i> {{ track.name }}
       </span>
 
-      <span
-        class="track-actions"
-        [ngClass]="{'open': options === trackI}">
+      <span class="track-actions">
         <span class="track-actions-list">
           <ng-template
             ngFor
