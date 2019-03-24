@@ -20,6 +20,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
   playlistEvent: Event;
   playlists: IPlaylist[] = [];
   album: IAlbum;
+  options: number = null;
 
   constructor(
     private _spotifyService: SpotifyService,
@@ -46,7 +47,24 @@ export class AlbumComponent implements OnInit, OnDestroy {
       });
   }
 
-  addToPlaylist(playlistId: string, track: ITrack) {
+  playlistIncludes(playlist: IPlaylist, track: ITrack): boolean {
+    let res = false;
+
+    for(let playlsitTrack of playlist.tracks.items) {
+      if (playlsitTrack.id === track.id) {
+        res = true;
+        break;
+      }
+    }
+    return res
+  }
+
+  toggleTrackOpt(e, i: number) {
+    e.stopPropagation();
+    this.options = (this.options !== i) ? i : null;
+  }
+
+  updatePlaylist(action: string, playlistId: string, track: ITrack) {
     track.album = {
       id: this.album.id,
       name: this.album.name,
@@ -54,8 +72,8 @@ export class AlbumComponent implements OnInit, OnDestroy {
     };
 
     this.playlistEvent.emit({
-      action: 'ADD_TRACK',
-      track,
+      action,
+      tracks: [track],
       playlist: {
         id: playlistId
       }

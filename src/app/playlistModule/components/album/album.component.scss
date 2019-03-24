@@ -1,8 +1,11 @@
 .album-component {
-  height: 100vh;
-  padding: 15px 35px;
-  max-width: 800px;
-  margin: auto;
+  min-height: 100vh;
+  
+  > article {
+    margin: auto;
+    max-width: 800px;
+    padding: 15px 35px;
+  }
 
   .album {
     img {
@@ -46,8 +49,7 @@
 
       &-list {
         border-radius: 4px;
-        list-style: none;
-        margin: 2px 0 0;
+        margin: 0;
         opacity: 0;
         padding: 0;
         position: absolute;
@@ -55,6 +57,8 @@
         top: 20px;
         visibility: hidden;
         z-index: -1;
+        transform: translateY(20px);
+        transition: opacity .2s ease-in-out, transform .2s ease-in-out
       }
 
       i {
@@ -67,13 +71,21 @@
       a {
         background: lighten($color-font, 5%);
         color: $color-font-light;
-        cursor: pointer;
         display: block;
         padding: 5px 10px;
+        width: 150px;
+
+        i {
+          color: $color-font-light;
+          display: inline-block;
+        }
+      }
+
+      a {
+        cursor: pointer;
         text-decoration: none;
         transform-origin: top center;
         transition: color .2s ease-in-out, background .2s ease-in-out;
-        width: 150px;
 
         &:hover {
           background: $color-font;
@@ -81,34 +93,21 @@
         }
       }
 
-      a:first-of-type {
+      *:first-of-type {
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
       }
 
-      a:last-of-type {
+      *:last-of-type {
         border-bottom-left-radius: 5px;
         border-bottom-right-radius: 5px;
       }
 
-      &:hover .track-actions-list {
-        perspective: 1000px;
+      &.open .track-actions-list {
         opacity: 1;
         visibility: visible;
+        transform: translateY(0px);
         z-index: 1;
-        a {
-          @for $i from 1 through 10 {
-            &:nth-child(#{$i}) {
-              animation: {
-                delay: (150ms * $i) - 300;
-                duration: 300ms;
-                fill-mode: forwards;
-                name: menu-open;
-                timing-function: ease-in-out;
-              }
-            }
-          }
-        }
       }
     }
 
@@ -116,23 +115,7 @@
       color: $color-font-light;
       font-size: 1.1rem;
       line-height: 1.4rem;
-      padding-left: 20px;
+      padding-left: 10px;
     }
-  }
-}
-
-@keyframes menu-open {
-  0% {
-    opacity: 0;
-    transform: rotateX(-90deg)
-  }
-
-  60% {
-    transform: rotateX(50deg)
-  }
-
-  100% {
-    opacity: 1;
-    transform: rotatieX(0deg)
   }
 }

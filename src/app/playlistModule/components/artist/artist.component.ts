@@ -6,7 +6,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { SpotifyService } from '@app/playlistModule/services';
-import { IArtist } from '@app/playlistModule/interfaces';
+import { IArtist, IAlbum } from '@app/playlistModule/interfaces';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -18,6 +18,8 @@ export class ArtistComponent implements OnInit, OnDestroy {
 
   playlistEvent: Event;
   artist: IArtist;
+  albums: IAlbum[];
+  relatedArtists: IArtist[];
 
   constructor(
     private _spotifyService: SpotifyService,
@@ -26,12 +28,16 @@ export class ArtistComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._activatedRoute.params
-      .pipe(
-        takeUntil(this._destroy)
-      )
+      .pipe(takeUntil(this._destroy))
       .subscribe(params => {
         this._spotifyService.getArtist(params['artistId'])
-          .subscribe((resp: any) => this.artist = resp);
+          .subscribe((artist: IArtist) => this.artist = artist);
+
+        this._spotifyService.getArtistAlbums(params['artistId'])
+          .subscribe((albums: IAlbum[]) => this.albums = albums);
+
+        this._spotifyService.getArtistRelated(params['artistId'])
+          .subscribe((relatedArtists: IArtist[]) => this.relatedArtists = relatedArtists);
       });
   }
 

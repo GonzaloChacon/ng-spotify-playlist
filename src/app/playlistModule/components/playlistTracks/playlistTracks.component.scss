@@ -2,7 +2,7 @@
   padding: 15px 35px;
 
   .track {
-    border-bottom: 1px solid $color-green-1;
+    border-top: 1px solid $color-green-1;
     overflow: hidden;
     padding: 10px 0;
     position: relative;
@@ -10,8 +10,8 @@
     transition: transform .3s .2s cubic-bezier(0.455, 0.030, 0.515, 0.955);
     transform-origin: top left !important;
 
-    &:last-of-type {
-      border-bottom: 0;
+    &:first-of-type {
+      border-top: 0;
     }
 
     span {

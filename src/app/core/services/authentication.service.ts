@@ -50,7 +50,7 @@ export class AuthService implements CanActivate {
     });
   }
 
-  deleteToken() {
+  logout() {
     deleteCookie(this._cookieName);
     this._api.resetHeaders();
     this._router.navigate(['login']);

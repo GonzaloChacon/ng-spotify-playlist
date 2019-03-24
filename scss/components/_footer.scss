@@ -1,0 +1,21 @@
+.main-footer {
+    background: $color-font;
+    height: 30px;
+    margin-top: -30px;
+    padding: 6px 15px;
+    position: relative;
+    z-index: 1;
+  
+    a {
+      color: $color-gray-2;
+      float: right;
+      text-decoration: none;
+      font-size: 1.6rem;
+      padding: 0 5px;
+      transition: color 200ms ease-in-out;
+  
+      &:hover {
+        color: $color-primary;
+      }
+    }
+  }

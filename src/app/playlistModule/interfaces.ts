@@ -55,7 +55,7 @@ export interface ITrack {
   artists: IArtist[]
   available_markets: string[]
   disc_number: number
-  dislpay?: boolean
+  display?: boolean
   duration_ms: number
   explicit: boolean
   external_ids: {
@@ -85,7 +85,7 @@ export interface IImage {
 export interface IPlaylist {
   collaborative: boolean
   description?: string
-  dislpay?: boolean
+  display?: boolean
   external_urls: {
     spotify: string
   }

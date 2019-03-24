@@ -13,16 +13,16 @@ const routes: Routes = [
     component: PlaylistComponent,
     children: [
       {
-        path: '',
-        component: SearchResultsComponent
-      },
-      {
         path: 'album/:albumId',
         component: AlbumComponent
       },
       {
         path: 'artist/:artistId',
         component: ArtistComponent
+      },
+      {
+        path: 'search/:search',
+        component: SearchResultsComponent
       }
     ]
   }

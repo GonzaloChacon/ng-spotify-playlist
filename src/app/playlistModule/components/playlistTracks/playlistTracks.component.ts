@@ -3,8 +3,7 @@
  */
 
 import { Component, OnInit, Input } from '@angular/core';
-import { SpotifyService } from '@app/playlistModule/services';
-import { ITrack, IOwner, IPlaylist } from '@app/playlistModule/interfaces';
+import { ITrack } from '@app/playlistModule/interfaces';
 import { StoreService, Event } from '@app/core/services';
 
 @Component({
@@ -12,21 +11,34 @@ import { StoreService, Event } from '@app/core/services';
   templateUrl: './playlistTracks.component.html'
 })
 export class PlaylistTracksComponent implements OnInit {
-
-  @Input('user') user: IOwner;
-  @Input('playlist') set currentPlaylist(playlist: IPlaylist) {
-    if (playlist) {
-      this.playlist = playlist;
-      this.getTracks();
+  /*
+   * TODO: Angular change detection doesn't recognize changes within arrays,
+   * only changes to the array reference. When a new track is added to the
+   * playlist, it's not reflected in the template.
+   * The binding to "playlistLength" has no other purpose to be able to detect
+   * when the playlist length changes and update the template.
+   * 
+   * Since the component is staleles, it will work for now, but check for
+   * a better solution (outside calling the Store in inside the playlist).
+   */
+  @Input('playlistLength') set newLenght(_: number) {
+    if (this.tracks) {
+      this.tracks.forEach(this.displayTrack);
     }
+  };
+
+  @Input('playlistId') playlistId: string;
+  @Input('playlistOwner') canEdit: string;
+  @Input('playlistTracks') set playlistTracks(tracks: ITrack[]) {
+    this.tracks = tracks;
+    this.tracks.forEach(this.displayTrack);
   }
 
+  update = false;
   playlistEvent: Event;
-  playlist: IPlaylist;
   tracks: ITrack[];
 
   constructor(
-    private _spotifyService: SpotifyService,
     private _storeService: StoreService
   ) {}
 
@@ -34,27 +46,20 @@ export class PlaylistTracksComponent implements OnInit {
     this.playlistEvent = this._storeService.getEvent('updatePlaylist');
   }
 
-  getTracks() {
-    this._spotifyService.getPlaylistTracks(this.user.id, this.playlist.id)
-      .subscribe((tracks: ITrack[]) => {
-        this.playlist.tracks.items = this.tracks = tracks;
-        this.tracks.forEach(this.displayTrack);
-      });
-  }
-
   displayTrack(track: ITrack, i: number) {
-    track.dislpay = false;
-    setTimeout(() => {
-      track.dislpay = true;
-    }, (i * 50));
+    if (!track.display) {
+      setTimeout(() => {
+        track.display = true;
+      }, (i * 50));
+    }
   }
 
   deleteTrack(track: ITrack) {
     this.playlistEvent.emit({
       action: 'DELETE_TRACK',
-      track,
+      tracks: [track],
       playlist: {
-        id: this.playlist.id
+        id: this.playlistId
       }
     });
   }

@@ -20,11 +20,14 @@
       class="playlists"
       *ngIf="playlists">
       <div
-        class="playlists-item {{ playlist.dislpay && 'display' }} {{ playlist.remove && 'remove' }}"
+        class="playlists-item {{ playlist.display && 'display' }} {{ playlist.remove && 'remove' }}"
         *ngFor="let playlist of playlists; index as i"
         [ngClass]="{'open': currentPlaylist && currentPlaylist.id === playlist.id}"
-        (click)="currentPlaylist = playlist">
-        <h4><i class="icon-headphones"></i> {{ playlist.name }}</h4>
+        (click)="displayTracks(playlist)">
+        <h4>
+          <i class="icon-headphones"></i>
+          {{ playlist.name }}
+        </h4>
 
         <p>
           <span>Tracks <b>{{ playlist.tracks.total }}</b></span>
@@ -91,8 +94,10 @@
   <app-playlist-tracks
     *ngIf="currentPlaylist"
     class="module-tracks"
-    [user]="user"
-    [playlist]="currentPlaylist">
+    [playlistId]="currentPlaylist.id"
+    [playlistTracks]="currentPlaylist.tracks.items"
+    [playlistLength]="currentPlaylist.tracks.items.length"
+    [playlistOwner]="user.id === currentPlaylist.owner.id || currentPlaylist.collaborative">
   </app-playlist-tracks>
   <!-- end Tracks -->
 

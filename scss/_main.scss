@@ -35,22 +35,31 @@ h1, h2, h3, h4, h5, h6 {
   font-family: $font-serif !important;
 }
 
-.main-footer {
-  background: $color-font;
-  height: 30px;
-  margin-top: -30px;
-  padding: 6px 15px;
+// Scrollbars
+* {
+  scrollbar-color: $color-gray-2 transparent;
+  scrollbar-width: thin; // Firefox support
+}
 
-  a {
-    color: $color-gray-2;
-    float: right;
-    text-decoration: none;
-    font-size: 1.6rem;
-    padding: 0 5px;
-    transition: color 200ms ease-in-out;
+::-webkit-scrollbar-track {
+  background-color: transparent; 
+}
 
-    &:hover {
-      color: $color-primary;
-    }
-  }
+::-webkit-scrollbar {
+  width: 8px;
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: $color-gray-2;
+  cursor: pointer;
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: $color-gray-2; 
+}
+
+.main-body {
+  height: 100vh;
+  padding-bottom: 30px;
 }

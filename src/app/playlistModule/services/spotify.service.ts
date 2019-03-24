@@ -34,6 +34,16 @@ export class SpotifyService {
     return this._api.get(`${this._endpoint}/artists/${id}`);
   }
 
+  getArtistAlbums(id: string): Observable<IAlbum[]> {
+    return this._api.get(`${this._endpoint}/artists/${id}/albums`)
+      .pipe(map(res => res.items));
+  }
+
+  getArtistRelated(id: string): Observable<IArtist[]> {
+    return this._api.get(`${this._endpoint}/artists/${id}/related-artists`)
+      .pipe(map(res => res.artists));
+  }
+
   getAlbum(id: string): Observable<IAlbum> {
     return this._api.get(`${this._endpoint}/albums/${id}`);
   }

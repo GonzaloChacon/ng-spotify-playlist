@@ -4,9 +4,11 @@
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { SpotifyService } from '@app/playlistModule/services';
 import { IAlbum, ITrack, IArtist } from '@app/playlistModule/interfaces';
 import { StoreService, Event } from '@app/core/services';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-search-results',
@@ -23,33 +25,37 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   constructor(
     private _spotifyService: SpotifyService,
-    private _storeService: StoreService
+    private _storeService: StoreService,
+    private _activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.playlistEvent = this._storeService.getEvent('updatePlaylist');
 
-    this._storeService.getEvent('search').emitter
-      .subscribe(this.searchOnSpotify.bind(this));
+    this._activatedRoute.params
+      .pipe(takeUntil(this._destroy))
+      .subscribe(params => {
+        this.searchOnSpotify(params['search']);
+      });
   }
 
-  searchOnSpotify({ search, artists, albums, tracks }) {
+  searchOnSpotify(search: string) {
     // TODO: improove this.
-    if (artists && search) {
+    if (search) {
       this._spotifyService.search(search, 'artist')
         .subscribe((resp: any) => this.artists = resp.artists.items);
     } else {
       this.artists = [];
     }
 
-    if (albums && search) {
+    if (search) {
       this._spotifyService.search(search, 'album')
         .subscribe((resp: any) => this.albums = resp.albums.items);
     } else {
       this.albums = [];
     }
 
-    if (tracks && search) {
+    if (search) {
       this._spotifyService.search(search, 'track')
         .subscribe((resp: any) => this.tracks = resp.tracks.items);
     } else {
@@ -57,10 +63,19 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     }
   }
 
-  addTrack(track: ITrack) {
+  addToPlaylist(playlistId: string, track: ITrack) {
+    // track.album = {
+    //   id: this.album.id,
+    //   name: this.album.name,
+    //   artists: this.album.artists
+    // };
+
     this.playlistEvent.emit({
       action: 'ADD_TRACK',
-      track
+      tracks: [track],
+      playlist: {
+        id: playlistId
+      }
     });
   }
 

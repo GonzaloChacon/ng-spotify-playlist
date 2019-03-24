@@ -10,10 +10,11 @@ import { SpotifyService } from '@app/playlistModule/services';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ITrack, IPlaylist, IOwner } from '@app/playlistModule/interfaces';
 import { objCloneDeep } from '@app/core/utils/utils';
+import { Router } from '@angular/router';
 
 export interface IPlaylistEvent {
   action: string
-  track: ITrack
+  tracks: ITrack[]
   playlist: any
 }
 
@@ -27,9 +28,9 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   newPlaylist = false;
 
   spotifyStore: Store;
-  searchEvent: Event;
   playlistEvent: Event;
   user: IOwner;
+  // currentPlaylist - used to store reference to open playlsit, instead of search for it everywhere
   currentPlaylist: IPlaylist;
   playlists: IPlaylist[] = [];
 
@@ -44,8 +45,18 @@ export class PlaylistComponent implements OnInit, OnDestroy {
 
   constructor(
     private _spotifyService: SpotifyService,
-    private _storeService: StoreService
-  ) {}
+    private _storeService: StoreService,
+    private _router: Router
+  ) {
+    /*
+     * Components loaded through the router-outlet can't bind values
+     * through @Input, that's why I've included a event interface in the
+     * Store service in order to subscribe in another components and
+     * receive or send info. This also alow to comunicate directly between
+     * component nested several levels away.
+     */
+    this.playlistEvent = this._storeService.createEvent('updatePlaylist');
+  }
 
   ngOnInit() {
     this.spotifyStore = this._storeService.getStore('spotify');
@@ -55,16 +66,6 @@ export class PlaylistComponent implements OnInit, OnDestroy {
       .subscribe(state => {
         this.playlists = state.playlists;
       });
-
-    /*
-     * Components loaded through the router-outlet can't bind values
-     * through @Input, that's why I've included a event interface in the
-     * Store service in order to subscribe in another components and
-     * receive or send info. This also alow to comunicate directly between
-     * component nested several levels away.
-     */
-    this.searchEvent = this._storeService.createEvent('search');
-    this.playlistEvent = this._storeService.createEvent('updatePlaylist');
 
     this._spotifyService.getUser()
       .subscribe(user => {
@@ -76,7 +77,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this._destroy))
       .pipe(debounceTime(500))
       .subscribe(searchValues => {
-        this.searchEvent.emit(searchValues);
+        this._router.navigate([`playlist/search/${searchValues.search}`]);
       });
 
     this.playlistEvent.emitter.subscribe(playload => {
@@ -89,47 +90,67 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   getPalylists() {
     this._spotifyService.getAllPlaylists(this.user.id)
       .subscribe(playlists => {
-        this.playlists = playlists;
-        this.playlists.forEach(this.displayPlaylist);
 
-        this.spotifyStore.update({ playlists: this.playlists });
+        playlists.forEach((playlist: IPlaylist, i: number) => {
+          this.getPlaylistTracks(playlist)<
+          this.slideInPlaylist(playlist, i);
+        });
+
+        this.spotifyStore.update({ playlists });
       });
   }
 
-  displayPlaylist(playlist: IPlaylist, i: number) {
-    playlist.dislpay = false;
+  getPlaylistTracks(playlist: IPlaylist) {
+    playlist.tracks.items = [];
+
+    this._spotifyService.getPlaylistTracks(this.user.id, playlist.id)
+      .subscribe((tracks: ITrack[]) => {
+        playlist.tracks.items = tracks;
+      });
+  }
+
+  displayTracks(playlist: IPlaylist) {
+    if (playlist.tracks.items.length) {
+      playlist.tracks.items.forEach(track => track.display = false);
+    }
+
+    this.currentPlaylist = playlist;
+  }
+
+  slideInPlaylist(playlist: IPlaylist, i: number) {
+    playlist.display = false;
     setTimeout(() => {
-      playlist.dislpay = true;
+      playlist.display = true;
     }, (i * 250));
   }
 
-  updatePlaylist({ action, playlist, track }: IPlaylistEvent) {
-    let currentPlaylist: IPlaylist;
+  updatePlaylist({ action, playlist, tracks }: IPlaylistEvent) {
+    let playlistToUpdate: IPlaylist;
     let playlistIndex: number;
     const playlists = this.playlists.map(item => objCloneDeep({}, item));
 
     if (playlist.id) {
       playlistIndex = this.playlists.findIndex(item => item.id === playlist.id);
-      currentPlaylist = playlists[playlistIndex];
+      playlistToUpdate = playlists[playlistIndex];
     }
 
     switch (action) {
 
       case 'DELETE_TRACK': {
         const body = {
-          tracks: [{ uri: track.uri }]
+          tracks: [{ uri: tracks[0].uri }]
         };
 
         this._spotifyService.deletePlaylistTrack(body, playlist.id)
           .subscribe(() => {
-            const index = currentPlaylist.tracks.items.findIndex(item => item.id === track.id);
+            const index = playlistToUpdate.tracks.items.findIndex(item => item.id === tracks[0].id);
             /*
              * We set this value in order to make the animaiton of the track leaving,
              * after it's gone we remove the track from the list.
              */
-            track.remove = true;
+            tracks[0].remove = true;
             setTimeout(() => {
-              currentPlaylist.tracks.items.splice(index, 1);
+              playlistToUpdate.tracks.items.splice(index, 1);
 
               this.spotifyStore.update({ playlists });
             }, 500);
@@ -139,14 +160,15 @@ export class PlaylistComponent implements OnInit, OnDestroy {
       }
 
       case 'ADD_TRACK': {
-        this._spotifyService.addPlaylistTrack(track.uri, playlist.id)
-          .subscribe(() => {
-            if (currentPlaylist.tracks.items && currentPlaylist.tracks.items.findIndex(item => item.id === track.id) === -1) {
-              currentPlaylist.tracks.items.push(track);
-            }
+        debugger
+        if (playlistToUpdate.tracks.items && playlistToUpdate.tracks.items.findIndex(item => item.id === tracks[0].id) === -1) {
+          this._spotifyService.addPlaylistTrack(tracks[0].uri, playlist.id)
+            .subscribe(() => {
 
-            this.spotifyStore.update({ playlists });
-          });
+              playlistToUpdate.tracks.items.push(tracks[0]);
+              this.spotifyStore.update({ playlists });
+            });
+        }
 
         break;
       }
@@ -181,7 +203,6 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.searchEvent.destroy();
     this.playlistEvent.destroy();
 
     this._destroy.next(true);

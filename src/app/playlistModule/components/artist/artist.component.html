@@ -1,0 +1,28 @@
+<section
+  class="artist-component"
+  *ngIf="artist">
+
+  <div class="artist">
+    <img src="{{artist.images[0].url}}">
+    <h5>{{ artist.name }}</h5>
+    <span>{{ artist.genres }}</span>
+  </div>
+
+  <section class="artist-albums">
+    <a
+      *ngFor="let album of albums"
+      routerLink="/playlist/album/{{album.id}}">
+      <img src="{{album.images[0].url}}" />
+      {{ album.name }}
+    </a>
+  </section>
+
+  <section  class="artist-related">
+    <a
+      class="btn btn-gray"
+      *ngFor="let artist of relatedArtists"
+      routerLink="/playlist/artist/{{artist.id}}">
+      {{ artist.name }}
+    </a>
+  </section>
+</section>
