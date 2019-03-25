@@ -27,7 +27,7 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
 
   describe('displayTrack()', () => {
     it('should set track.display TRUE', () => {
-      let track = {
+      const track = {
         display: false
       };
       jasmine.clock().install();
@@ -59,7 +59,7 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
         action: 'DELETE_TRACK',
         tracks: [{ name: 'track1' }],
         playlist: { id: 'playlist123' }
-      }
+      };
 
       expect(spyEventEmitter).toHaveBeenCalledWith(res);
     });

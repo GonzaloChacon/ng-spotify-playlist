@@ -89,7 +89,7 @@ describe('AuthService Unite Tests:', () => {
     it('should set api headers', () => {
       expect(spyApiSetHeaders).toHaveBeenCalledWith({
         Authorization: `Bearer ${token}`
-      })
+      });
     });
   });
 

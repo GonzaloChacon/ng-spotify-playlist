@@ -9,7 +9,7 @@ import { StoreService, Store, Event } from '@app/core/services';
 import { SpotifyService } from '@app/playlistModule/services';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ITrack, IPlaylist, IOwner } from '@app/playlistModule/interfaces';
-import { objCloneDeep } from '@app/core/utils/utils';
+import { objMergeDeep } from '@app/core/utils/utils';
 import { Router } from '@angular/router';
 
 export interface IPlaylistEvent {
@@ -119,7 +119,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
 
   slideInPlaylist(playlist: IPlaylist, i: number) {
     playlist.display = false;
-    
+
     setTimeout(() => {
       playlist.display = true;
     }, (i * 250));
@@ -128,7 +128,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   updatePlaylist({ action, playlist, tracks }: IPlaylistEvent) {
     let playlistToUpdate: IPlaylist;
     let playlistIndex: number;
-    const playlists = this.playlists.map(item => objCloneDeep({}, item));
+    const playlists = this.playlists.map(item => objMergeDeep({}, item));
 
     if (playlist.id) {
       playlistIndex = this.playlists.findIndex(item => item.id === playlist.id);
@@ -161,7 +161,6 @@ export class PlaylistComponent implements OnInit, OnDestroy {
       }
 
       case 'ADD_TRACK': {
-        debugger
         if (playlistToUpdate.tracks.items && playlistToUpdate.tracks.items.findIndex(item => item.id === tracks[0].id) === -1) {
           this._spotifyService.addPlaylistTrack(tracks[0].uri, playlist.id)
             .subscribe(() => {

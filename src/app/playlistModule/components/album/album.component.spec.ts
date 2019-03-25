@@ -10,7 +10,7 @@ import { AlbumComponent } from './album.component';
 import { ALBUM_MOCK, PLAYLISTS_MOCK, ARTIST_MOCK } from '@app/core/utils/testMocks';
 
 class MockActivatedRoute extends ActivatedRoute {
-  public params = observableOf({ albumId: 'album123' })
+  public params = observableOf({ albumId: 'album123' });
 }
 describe('AlbumComponent Unit Tests:', () => {
   let component: AlbumComponent;
@@ -53,8 +53,8 @@ describe('AlbumComponent Unit Tests:', () => {
         component.ngOnInit();
 
         expect(spySpofityGetAlbum).toHaveBeenCalledWith('album123');
-        done()
-      }, 0)
+        done();
+      }, 0);
     });
   });
 
@@ -76,7 +76,7 @@ describe('AlbumComponent Unit Tests:', () => {
             }
           ]
         }
-      }
+      };
     });
 
     it('should return TRUE if playlist include track', () => {
@@ -90,8 +90,8 @@ describe('AlbumComponent Unit Tests:', () => {
 
   describe('toggleTrackOpt()', () => {
     const e = {
-      stopPropagation() { return }
-    }
+      stopPropagation() { return; }
+    };
 
     it('should store track index in options', () => {
       component.toggleTrackOpt(e, 1);
@@ -121,13 +121,13 @@ describe('AlbumComponent Unit Tests:', () => {
           album: {
             id: '0kaYtACg9wLVZZyrqSEHyU',
             name: 'Super awesome album',
-            artists: [ 
+            artists: [
               ARTIST_MOCK
             ]
           }
         }],
         playlist: { id: 'playlist123' }
-      }
+      };
 
       expect(spyEventEmitter).toHaveBeenCalledWith(res);
     });
@@ -135,7 +135,7 @@ describe('AlbumComponent Unit Tests:', () => {
 
   describe('displayTrack()', () => {
     it('should set track.display TRUE', () => {
-      let track = {
+      const track = {
         display: false
       };
       jasmine.clock().install();

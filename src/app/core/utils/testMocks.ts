@@ -1,3 +1,7 @@
+/**
+ * Gonzalo Chacón
+ */
+
 export const USER_MOCK = {
   display_name: 'Gonzalo Chacón',
   email: 'gonzalochacon@gmail.com',

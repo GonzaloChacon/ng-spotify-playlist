@@ -51,13 +51,13 @@ export class AlbumComponent implements OnInit, OnDestroy {
   playlistIncludes(playlist: IPlaylist, track: ITrack): boolean {
     let res = false;
 
-    for(let playlsitTrack of playlist.tracks.items) {
+    for (const playlsitTrack of playlist.tracks.items) {
       if (playlsitTrack.id === track.id) {
         res = true;
         break;
       }
     }
-    return res
+    return res;
   }
 
   toggleTrackOpt(e, i: number) {

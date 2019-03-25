@@ -10,7 +10,7 @@ import { USER_MOCK, PLAYLISTS_MOCK, TRACKS_MOCK } from '@app/core/utils/testMock
 
 class MockRouter {
   navigate = jasmine.createSpy().and.returnValue(true);
-};
+}
 
 describe('PlaylistTracksComponent Unit Tests:', () => {
   let component: PlaylistComponent;
@@ -44,7 +44,7 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
 
   describe('ngOnInit()', () => {
     let spyGetPlaylists;
-    let spyUpdatePlaylist
+    let spyUpdatePlaylist;
 
     beforeEach(() => {
       spyGetPlaylists = spyOn(component, 'getPalylists').and.returnValue(true);
@@ -61,8 +61,8 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
     it('should subscribe to spotify store', done => {
       component.ngOnInit();
 
-      component.spotifyStore.update({ playlists: PLAYLISTS_MOCK});
-      
+      component.spotifyStore.update({ playlists: PLAYLISTS_MOCK });
+
       setTimeout(() => {
         expect(component.playlists.length).toBe(1);
         done();
@@ -95,7 +95,7 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
     });
 
     it('should emit event loading', () => {
-      let spyEvent = spyOn(_storeService, 'emitEvent').and.returnValue(true);
+      const spyEvent = spyOn(_storeService, 'emitEvent').and.returnValue(true);
       component.ngOnInit();
 
       expect(spyEvent).toHaveBeenCalledWith('loading', false);
@@ -105,11 +105,11 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
   describe('getPalylists()', () => {
     let spySlideInPlaylist;
     const update = jasmine.createSpy();
-    let spyGetPlaylistTracks;
-    
+    let spyGetPlaylistTracksC;
+
     beforeEach(() => {
       spySlideInPlaylist = spyOn(component, 'slideInPlaylist').and.returnValue(true);
-      spyGetPlaylistTracks = spyOn(component, 'getPlaylistTracks').and.returnValue(true);
+      spyGetPlaylistTracksC = spyOn(component, 'getPlaylistTracks').and.returnValue(true);
 
       component.spotifyStore = {
         update
@@ -124,7 +124,7 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
     });
 
     it('should call getPlaylistTracks()', () => {
-      expect(spyGetPlaylistTracks).toHaveBeenCalled();
+      expect(spyGetPlaylistTracksC).toHaveBeenCalled();
     });
 
     it('should call slideInPlaylist()', () => {
@@ -143,7 +143,7 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
         items: undefined
       }
     };
-    
+
     beforeEach(() => {
       component.user = USER_MOCK as any;
       component.getPlaylistTracks(playlist as any);
@@ -160,7 +160,7 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
 
   describe('slideInPlaylist()', () => {
     it('should set playlist.display TRUE', done => {
-      let playlist = {
+      const playlist = {
         display: false
       };
 
@@ -186,7 +186,7 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
         ]
       }
     };
-    
+
     it('should set tracks.display to false', () => {
       component.displayTracks(playlist as any);
 

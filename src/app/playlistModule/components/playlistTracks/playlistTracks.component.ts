@@ -17,7 +17,7 @@ export class PlaylistTracksComponent implements OnInit {
    * playlist, it's not reflected in the template.
    * The binding to 'playlistLength' has no other purpose to be able to detect
    * when the playlist length changes and update the template.
-   * 
+   *
    * Since the component is staleles, it will work for now, but check for
    * a better solution (outside calling the Store in inside the playlist).
    */
@@ -25,7 +25,7 @@ export class PlaylistTracksComponent implements OnInit {
     if (this.tracks) {
       this.tracks.forEach(this.displayTrack);
     }
-  };
+  }
 
   @Input('playlistId') playlistId: string;
   @Input('playlistOwner') canEdit: string;
