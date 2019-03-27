@@ -53,12 +53,14 @@ describe('toggleTrackOpt()', () => {
   const e = {
     stopPropagation() { return; }
   };
-  const options = 0;
 
   it('should store track index in options', () => {
-    toggleTrackOpt.bind(this);
-    toggleTrackOpt(e, 1);
+    const obj = {
+      options: 0,
+      toggleTrackOpt
+    };
 
-    expect(options).toBe(1);
+    obj.toggleTrackOpt(e, 1);
+    expect(obj.options).toBe(1);
   });
 });
