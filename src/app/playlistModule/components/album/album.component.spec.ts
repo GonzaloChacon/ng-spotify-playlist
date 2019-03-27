@@ -58,48 +58,6 @@ describe('AlbumComponent Unit Tests:', () => {
     });
   });
 
-  describe('playlistIncludes()', () => {
-    let playlist;
-
-    beforeEach(() => {
-      playlist = {
-        tracks: {
-          items: [
-            {
-              id: '123'
-            },
-            {
-              id: '456'
-            },
-            {
-              id: '789'
-            }
-          ]
-        }
-      };
-    });
-
-    it('should return TRUE if playlist include track', () => {
-      expect(component.playlistIncludes(playlist, { id: '123' } as any)).toBe(true);
-    });
-
-    it('should return FALSE if playlist does NOT include track', () => {
-      expect(component.playlistIncludes(playlist, { id: '555' } as any)).toBe(false);
-    });
-  });
-
-  describe('toggleTrackOpt()', () => {
-    const e = {
-      stopPropagation() { return; }
-    };
-
-    it('should store track index in options', () => {
-      component.toggleTrackOpt(e, 1);
-
-      expect(component.options).toBe(1);
-    });
-  });
-
   describe('updatePlaylist()', () => {
     let updatePlaylistEvent: Event;
     let spyEventEmitter;
@@ -130,21 +88,6 @@ describe('AlbumComponent Unit Tests:', () => {
       };
 
       expect(spyEventEmitter).toHaveBeenCalledWith(res);
-    });
-  });
-
-  describe('displayTrack()', () => {
-    it('should set track.display TRUE', () => {
-      const track = {
-        display: false
-      };
-      jasmine.clock().install();
-
-      component.displayTrack(track as any, 0);
-      jasmine.clock().tick(1000);
-
-      expect(track.display).toBe(true);
-      jasmine.clock().uninstall();
     });
   });
 });

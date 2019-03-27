@@ -109,7 +109,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
       });
   }
 
-  displayTracks(playlist: IPlaylist) {
+  setDisplays(playlist: IPlaylist) {
     if (playlist.tracks.items.length) {
       playlist.tracks.items.forEach(track => track.display = false);
     }

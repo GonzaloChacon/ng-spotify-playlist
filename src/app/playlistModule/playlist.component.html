@@ -23,7 +23,7 @@
         class="playlists-item {{ playlist.display && 'display' }} {{ playlist.remove && 'remove' }}"
         *ngFor="let playlist of playlists; index as i"
         [ngClass]="{'open': currentPlaylist && currentPlaylist.id === playlist.id}"
-        (click)="displayTracks(playlist)">
+        (click)="setDisplays(playlist)">
         <h4>
           <i class="icon-headphones"></i>
           {{ playlist.name }}

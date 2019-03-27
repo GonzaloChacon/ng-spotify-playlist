@@ -9,6 +9,7 @@ import { SpotifyService } from '@app/playlistModule/services';
 import { IAlbum, ITrack, IPlaylist } from '@app/playlistModule/interfaces';
 import { StoreService, Event } from '@app/core/services';
 import { ActivatedRoute } from '@angular/router';
+import { toggleTrackOpt, playlistIncludes, setDisplay } from '@app/playlistModule/components/utils';
 
 @Component({
   selector: 'app-album',
@@ -21,6 +22,9 @@ export class AlbumComponent implements OnInit, OnDestroy {
   playlists: IPlaylist[] = [];
   album: IAlbum;
   options: number = null;
+
+  toggleTrackOpt = toggleTrackOpt.bind(this);
+  playlistIncludes = playlistIncludes;
 
   constructor(
     private _spotifyService: SpotifyService,
@@ -42,27 +46,10 @@ export class AlbumComponent implements OnInit, OnDestroy {
       .subscribe(params => {
         this._spotifyService.getAlbum(params['albumId'])
           .subscribe((album: IAlbum) => {
-            album.tracks.items.forEach(this.displayTrack);
+            album.tracks.items.forEach(setDisplay);
             this.album = album;
           });
       });
-  }
-
-  playlistIncludes(playlist: IPlaylist, track: ITrack): boolean {
-    let res = false;
-
-    for (const playlsitTrack of playlist.tracks.items) {
-      if (playlsitTrack.id === track.id) {
-        res = true;
-        break;
-      }
-    }
-    return res;
-  }
-
-  toggleTrackOpt(e, i: number) {
-    e.stopPropagation();
-    this.options = (this.options !== i) ? i : null;
   }
 
   updatePlaylist(action: string, playlistId: string, track: ITrack) {
@@ -79,14 +66,6 @@ export class AlbumComponent implements OnInit, OnDestroy {
         id: playlistId
       }
     });
-  }
-
-  displayTrack(track: ITrack, i: number) {
-    if (!track.display) {
-      setTimeout(() => {
-        track.display = true;
-      }, (i * 50));
-    }
   }
 
   ngOnDestroy(): void {

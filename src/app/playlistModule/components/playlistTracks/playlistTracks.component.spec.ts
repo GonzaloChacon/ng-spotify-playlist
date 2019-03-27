@@ -25,21 +25,6 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
     });
   });
 
-  describe('displayTrack()', () => {
-    it('should set track.display TRUE', () => {
-      const track = {
-        display: false
-      };
-      jasmine.clock().install();
-
-      component.displayTrack(track as any, 0);
-      jasmine.clock().tick(1000);
-
-      expect(track.display).toBe(true);
-      jasmine.clock().uninstall();
-    });
-  });
-
   describe('deleteTrack()', () => {
     let updatePlaylistEvent: Event;
     let spyEventEmitter;

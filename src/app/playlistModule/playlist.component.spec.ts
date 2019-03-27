@@ -173,7 +173,7 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
     });
   });
 
-  describe('displayTracks()', () => {
+  describe('setDisplays()', () => {
     const playlist = {
       tracks: {
         items: [
@@ -188,14 +188,14 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
     };
 
     it('should set tracks.display to false', () => {
-      component.displayTracks(playlist as any);
+      component.setDisplays(playlist as any);
 
       expect(playlist.tracks.items[0].display).toBe(false);
       expect(playlist.tracks.items[1].display).toBe(false);
     });
 
     it('should store playlist reference in currentPlaylist', () => {
-      component.displayTracks(playlist as any);
+      component.setDisplays(playlist as any);
 
       expect(component.currentPlaylist).toBe(playlist as any);
     });

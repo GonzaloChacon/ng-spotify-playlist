@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ng-spotiy-playlist": {
+    "ng-spoti-fy": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ng-spotiy-playlist",
+            "outputPath": "dist/ng-spoti-fy",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-spotiy-playlist:build"
+            "browserTarget": "ng-spoti-fy:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ng-spotiy-playlist:build:production"
+              "browserTarget": "ng-spoti-fy:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-spotiy-playlist:build"
+            "browserTarget": "ng-spoti-fy:build"
           }
         },
         "test": {
@@ -107,7 +107,7 @@
         }
       }
     },
-    "ng-spotiy-playlist-e2e": {
+    "ng-spoti-fy-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -116,11 +116,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ng-spotiy-playlist:serve"
+            "devServerTarget": "ng-spoti-fy:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ng-spotiy-playlist:serve:production"
+              "devServerTarget": "ng-spoti-fy:serve:production"
             }
           }
         },
@@ -136,5 +136,5 @@
       }
     }
   },
-  "defaultProject": "ng-spotiy-playlist"
+  "defaultProject": "ng-spoti-fy"
 }

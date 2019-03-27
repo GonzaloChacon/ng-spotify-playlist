@@ -1,0 +1,76 @@
+<section
+  class="search-component"
+  (click)="toggleTrackOpt($event, null)">
+  <!-- <article>
+    <header class="album">
+      <img src="{{ album.images[0].url }}" />
+      <h5>{{ album.name }}</h5>
+      <a routerLink="/playlist/artist/{{ album.artists[0].id }}">{{
+        album.artists[0].name
+      }}</a>
+      <span
+        >Tracks <b>{{ album.tracks.total }}</b></span
+      >
+    </header>
+  </article> -->
+
+  <!-- Artists Results -->
+  <section *ngIf="albums">
+    <div
+      class="album"
+      *ngFor="let album of albums">
+      <img src="{{ album.images[0].url }}" />
+      <h5>{{ album.name }}</h5>
+      <a routerLink="/playlist/artist/{{ album.artists[0].id }}">
+        {{album.artists[0].name}}</a>
+    </div>
+  </section>
+  <!-- end Artists Results -->
+
+  <!-- Tracks Results -->
+  <section *ngIf="tracks">
+    <div
+      *ngFor="let track of tracks; index as trackI"
+      class="track {{ track.display && 'display' }}"
+      [ngClass]="{ 'open-actions': options === trackI }">
+
+      <span class="track-name">
+        <i class="icon-music"></i> {{ track.name }} <br />
+        <a
+          class="track-link"
+          routerLink="/playlist/album/{{track.album.id}}">
+          {{track.album.name}}
+        </a>
+        &#8226;
+        <a
+          class="track-link"
+          routerLink="/playlist/artist/{{track.album.artists[0].id}}">
+          {{track.album.artists[0].name}}
+        </a>
+      </span>
+
+      <span class="track-actions">
+        <span class="track-actions-list">
+          <ng-template ngFor let-playlist [ngForOf]="playlists">
+            <a
+              *ngIf="!playlistIncludes(playlist, track); else includedInPlaylist"
+              (click)="updatePlaylist('ADD_TRACK', playlist.id, track)">
+              Add to <b>{{ playlist.name }}</b>
+            </a>
+
+            <ng-template #includedInPlaylist>
+              <a (click)="updatePlaylist('DELETE_TRACK', playlist.id, track)">
+                <i class="icon-check"></i>
+                Remove from <b>{{ playlist.name }}</b>
+              </a>
+            </ng-template>
+          </ng-template>
+        </span>
+        <i class="icon-more-horizontal" (click)="toggleTrackOpt($event, trackI)"></i>
+      </span>
+    </div>
+
+  </section>
+  <!-- end Tracks Results -->
+
+</section>

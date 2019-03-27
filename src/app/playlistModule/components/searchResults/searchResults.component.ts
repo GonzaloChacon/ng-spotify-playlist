@@ -6,9 +6,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { SpotifyService } from '@app/playlistModule/services';
-import { IAlbum, ITrack, IArtist } from '@app/playlistModule/interfaces';
+import { IAlbum, ITrack, IArtist, IPlaylist } from '@app/playlistModule/interfaces';
 import { StoreService, Event } from '@app/core/services';
 import { ActivatedRoute } from '@angular/router';
+import { toggleTrackOpt, playlistIncludes, setDisplay } from '@app/playlistModule/components/utils';
 
 @Component({
   selector: 'app-search-results',
@@ -22,6 +23,11 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   albums: IAlbum[] = [];
   artists: IArtist[] = [];
   tracks: ITrack[] = [];
+  playlists: IPlaylist[] = [];
+  options: number;
+
+  toggleTrackOpt = toggleTrackOpt.bind(this);
+  playlistIncludes = playlistIncludes;
 
   constructor(
     private _spotifyService: SpotifyService,
@@ -31,6 +37,12 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.playlistEvent = this._storeService.getEvent('updatePlaylist');
+
+    this._storeService.listenTo('store', 'spotify')
+      .pipe(takeUntil(this._destroy))
+      .subscribe(({ playlists }: { playlists: IPlaylist[] }) => {
+        this.playlists = playlists.filter(playlist => playlist.public);
+      });
 
     this._activatedRoute.params
       .pipe(takeUntil(this._destroy))
@@ -44,21 +56,18 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     if (search) {
       this._spotifyService.search(search, 'artist')
         .subscribe((resp: any) => this.artists = resp.artists.items);
-    } else {
-      this.artists = [];
-    }
 
-    if (search) {
       this._spotifyService.search(search, 'album')
         .subscribe((resp: any) => this.albums = resp.albums.items);
-    } else {
-      this.albums = [];
-    }
 
-    if (search) {
       this._spotifyService.search(search, 'track')
-        .subscribe((resp: any) => this.tracks = resp.tracks.items);
+        .subscribe((resp: any) => {
+          resp.tracks.items.forEach(setDisplay);
+          this.tracks = resp.tracks.items;
+        });
     } else {
+      this.artists = [];
+      this.albums = [];
       this.tracks = [];
     }
   }

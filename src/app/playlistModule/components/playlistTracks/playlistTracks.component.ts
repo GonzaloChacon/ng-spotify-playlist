@@ -5,6 +5,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ITrack } from '@app/playlistModule/interfaces';
 import { StoreService, Event } from '@app/core/services';
+import { setDisplay } from '@app/playlistModule/components/utils';
 
 @Component({
   selector: 'app-playlist-tracks',
@@ -23,7 +24,7 @@ export class PlaylistTracksComponent implements OnInit {
    */
   @Input('playlistLength') set newLenght(_: number) {
     if (this.tracks) {
-      this.tracks.forEach(this.displayTrack);
+      this.tracks.forEach(setDisplay);
     }
   }
 
@@ -31,7 +32,7 @@ export class PlaylistTracksComponent implements OnInit {
   @Input('playlistOwner') canEdit: string;
   @Input('playlistTracks') set playlistTracks(tracks: ITrack[]) {
     this.tracks = tracks;
-    this.tracks.forEach(this.displayTrack);
+    this.tracks.forEach(setDisplay);
   }
 
   update = false;
@@ -44,14 +45,6 @@ export class PlaylistTracksComponent implements OnInit {
 
   ngOnInit() {
     this.playlistEvent = this._storeService.getEvent('updatePlaylist');
-  }
-
-  displayTrack(track: ITrack, i: number) {
-    if (!track.display) {
-      setTimeout(() => {
-        track.display = true;
-      }, (i * 50));
-    }
   }
 
   deleteTrack(track: ITrack) {
