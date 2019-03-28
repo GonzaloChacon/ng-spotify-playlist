@@ -24,6 +24,7 @@ describe('ArtistComponent Unit Tests:', () => {
     _spotifyService = new SpotifyService(null);
     _activatedRoute = new MockActivatedRoute();
 
+    jasmine.clock().install();
     component = new ArtistComponent(_spotifyService, _activatedRoute);
 
     spySpofityGetArtist = spyOn(_spotifyService, 'getArtist').and.returnValue(observableOf(ARTIST_MOCK));
@@ -31,32 +32,30 @@ describe('ArtistComponent Unit Tests:', () => {
     spySpofityGetArtistRelated = spyOn(_spotifyService, 'getArtistRelated').and.returnValue(observableOf([ARTIST_MOCK]));
   });
 
+  afterEach(() => {
+    jasmine.clock().uninstall();
+  });
+
   describe('ngOnInit()', () => {
-    it('should get artist', done => {
-      setTimeout(() => {
-        component.ngOnInit();
+    it('should get artist', () => {
+      component.ngOnInit();
 
-        expect(spySpofityGetArtist).toHaveBeenCalledWith('artist123');
-        done();
-      }, 0);
+      jasmine.clock().tick(5000);
+      expect(spySpofityGetArtist).toHaveBeenCalledWith('artist123');
     });
 
-    it('should get artist albums', done => {
-      setTimeout(() => {
-        component.ngOnInit();
+    it('should get artist albums', () => {
+      component.ngOnInit();
 
-        expect(spySpofityGetArtistAlbums).toHaveBeenCalledWith('artist123');
-        done();
-      }, 0);
+      jasmine.clock().tick(5000);
+      expect(spySpofityGetArtistAlbums).toHaveBeenCalledWith('artist123');
     });
 
-    it('should get artist related', done => {
-      setTimeout(() => {
-        component.ngOnInit();
+    it('should get artist related', () => {
+      component.ngOnInit();
 
-        expect(spySpofityGetArtistRelated).toHaveBeenCalledWith('artist123');
-        done();
-      }, 0);
+      jasmine.clock().tick(5000);
+      expect(spySpofityGetArtistRelated).toHaveBeenCalledWith('artist123');
     });
   });
 });

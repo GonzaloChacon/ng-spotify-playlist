@@ -1,0 +1,14 @@
+.artist {
+  border-radius: 50%;
+  display: inline-block;
+  padding: 10px;
+  text-align: center;
+
+  span {
+    background-size: cover;
+    border-radius: 50%;
+    display: inline-block;
+    height: 150px;
+    width: 150px;
+  }
+}

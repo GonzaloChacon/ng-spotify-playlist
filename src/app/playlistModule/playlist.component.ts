@@ -164,6 +164,8 @@ export class PlaylistComponent implements OnInit, OnDestroy {
         if (playlistToUpdate.tracks.items && playlistToUpdate.tracks.items.findIndex(item => item.id === tracks[0].id) === -1) {
           this._spotifyService.addPlaylistTrack(tracks[0].uri, playlist.id)
             .subscribe(() => {
+              tracks[0].display = false;
+              tracks[0].remove = false;
 
               playlistToUpdate.tracks.items.push(tracks[0]);
               this.spotifyStore.update({ playlists });

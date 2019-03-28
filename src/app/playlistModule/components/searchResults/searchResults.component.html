@@ -1,31 +1,30 @@
 <section
   class="search-component"
   (click)="toggleTrackOpt($event, null)">
-  <!-- <article>
-    <header class="album">
-      <img src="{{ album.images[0].url }}" />
-      <h5>{{ album.name }}</h5>
-      <a routerLink="/playlist/artist/{{ album.artists[0].id }}">{{
-        album.artists[0].name
-      }}</a>
-      <span
-        >Tracks <b>{{ album.tracks.total }}</b></span
-      >
-    </header>
-  </article> -->
 
   <!-- Artists Results -->
+  <section *ngIf="artists">
+    <a
+      class="artist"
+      routerLink="/playlist/artist/{{ artist.id }}"
+      *ngFor="let artist of artists">
+      <span [ngStyle]="{'background-image': 'url(' + artist.images[0].url + ')'}"></span>
+      <h5>{{ artist.name }}</h5>
+    </a>
+  </section>
+  <!-- end Artists Results -->
+
+  <!-- Albums Results -->
   <section *ngIf="albums">
-    <div
+    <a
       class="album"
+      routerLink="/playlist/album/{{ album.id }}"
       *ngFor="let album of albums">
       <img src="{{ album.images[0].url }}" />
       <h5>{{ album.name }}</h5>
-      <a routerLink="/playlist/artist/{{ album.artists[0].id }}">
-        {{album.artists[0].name}}</a>
-    </div>
+    </a>
   </section>
-  <!-- end Artists Results -->
+  <!-- end Albums Results -->
 
   <!-- Tracks Results -->
   <section *ngIf="tracks">
@@ -66,7 +65,10 @@
             </ng-template>
           </ng-template>
         </span>
-        <i class="icon-more-horizontal" (click)="toggleTrackOpt($event, trackI)"></i>
+        <i
+          class="icon-more-horizontal"
+          (click)="toggleTrackOpt($event, trackI)">
+        </i>
       </span>
     </div>
 

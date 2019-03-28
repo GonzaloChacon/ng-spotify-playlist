@@ -26,7 +26,7 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
     _spotifyService = new SpotifyService(null);
     _router = new MockRouter();
     _storeService = new StoreService();
-    _storeService.createStore('spotify', { playlists: [] });
+    _storeService.createStore('spotify', { playlists: PLAYLISTS_MOCK });
     _storeService.createEvent('loading');
 
     spyGetUser = spyOn(_spotifyService, 'getUser').and.returnValue(observableOf(USER_MOCK));
@@ -47,8 +47,13 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
     let spyUpdatePlaylist;
 
     beforeEach(() => {
+      jasmine.clock().install();
       spyGetPlaylists = spyOn(component, 'getPalylists').and.returnValue(true);
       spyUpdatePlaylist = spyOn(component, 'updatePlaylist').and.returnValue(true);
+    });
+
+    afterEach(() => {
+      jasmine.clock().uninstall();
     });
 
     it('should subscribe to spotifyStore', () => {
@@ -58,15 +63,11 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
       expect(component.spotifyStore).toBeDefined();
     });
 
-    it('should subscribe to spotify store', done => {
+    it('should subscribe to spotify store', () => {
       component.ngOnInit();
 
-      component.spotifyStore.update({ playlists: PLAYLISTS_MOCK });
-
-      setTimeout(() => {
-        expect(component.playlists.length).toBe(1);
-        done();
-      }, 0);
+      jasmine.clock().tick(5000);
+      expect(component.playlists.length).toBe(1);
     });
 
     it('should get user info', () => {
@@ -82,16 +83,15 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
     });
 
     it('should subscribe to updatePlaylist and call updatePlaylist', () => {
-      jasmine.clock().install();
       component.ngOnInit();
 
       const update = { action: 'ADD_TRACK' };
 
+      jasmine.clock().tick(5000);
       _storeService.getEvent('updatePlaylist').emit(update);
-      jasmine.clock().tick(100);
+      jasmine.clock().tick(5000);
 
       expect(spyUpdatePlaylist).toHaveBeenCalledWith(update);
-      jasmine.clock().uninstall();
     });
 
     it('should emit event loading', () => {

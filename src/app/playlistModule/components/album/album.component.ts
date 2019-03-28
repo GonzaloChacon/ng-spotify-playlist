@@ -23,7 +23,7 @@ export class AlbumComponent implements OnInit, OnDestroy {
   album: IAlbum;
   options: number = null;
 
-  toggleTrackOpt = toggleTrackOpt.bind(this);
+  toggleTrackOpt: () => any = toggleTrackOpt.bind(this);
   playlistIncludes = playlistIncludes;
 
   constructor(

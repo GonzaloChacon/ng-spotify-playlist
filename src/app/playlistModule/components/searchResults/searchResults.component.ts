@@ -26,7 +26,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   playlists: IPlaylist[] = [];
   options: number;
 
-  toggleTrackOpt = toggleTrackOpt.bind(this);
+  toggleTrackOpt: () => any = toggleTrackOpt.bind(this);
   playlistIncludes = playlistIncludes;
 
   constructor(
@@ -52,7 +52,6 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   }
 
   searchOnSpotify(search: string) {
-    // TODO: improove this.
     if (search) {
       this._spotifyService.search(search, 'artist')
         .subscribe((resp: any) => this.artists = resp.artists.items);
@@ -72,15 +71,9 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     }
   }
 
-  addToPlaylist(playlistId: string, track: ITrack) {
-    // track.album = {
-    //   id: this.album.id,
-    //   name: this.album.name,
-    //   artists: this.album.artists
-    // };
-
+  updatePlaylist(action: string, playlistId: string, track: ITrack) {
     this.playlistEvent.emit({
-      action: 'ADD_TRACK',
+      action,
       tracks: [track],
       playlist: {
         id: playlistId

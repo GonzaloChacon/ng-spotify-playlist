@@ -21,7 +21,7 @@ describe('SpotifyService Unit Tests:', () => {
     api = new ApiService(null);
     service = new SpotifyService(api);
 
-    spyApiGet = spyOn(api, 'get').and.returnValue(observableOf({ items: [{ track: {} }] }));
+    spyApiGet = spyOn(api, 'get').and.returnValue(observableOf({ items: [{ track: {} }], artists: [] }));
     spyApiPost = spyOn(api, 'post').and.returnValue(observableOf(true));
     spyApiDelete = spyOn(api, 'delete').and.returnValue(observableOf(true));
   });

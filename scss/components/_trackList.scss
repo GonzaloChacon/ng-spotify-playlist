@@ -26,7 +26,7 @@
 
   &.open-actions {
     z-index: 1;
-    
+
     .track-actions-list {
       opacity: 1;
       visibility: visible;
@@ -45,16 +45,6 @@
     i {
       color: $color-primary;
       padding-right: 5px;
-    }
-  }
-
-  &-link {
-    color: $color-font-light;
-    text-decoration: none;
-    transition: color .2s ease-in-out;
-
-    &:hover {
-      color: $color-primary;
     }
   }
 

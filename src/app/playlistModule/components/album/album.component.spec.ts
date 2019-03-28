@@ -25,12 +25,17 @@ describe('AlbumComponent Unit Tests:', () => {
     _storeService = new StoreService();
     _activatedRoute = new MockActivatedRoute();
 
+    jasmine.clock().install();
     _storeService.createStore('spotify', { playlists: PLAYLISTS_MOCK });
     _storeService.createEvent('updatePlaylist');
 
     component = new AlbumComponent(_spotifyService, _storeService, _activatedRoute);
 
     spySpofityGetAlbum = spyOn(_spotifyService, 'getAlbum').and.returnValue(observableOf(ALBUM_MOCK));
+  });
+
+  afterEach(() => {
+    jasmine.clock().uninstall();
   });
 
   describe('ngOnInit()', () => {
@@ -48,13 +53,11 @@ describe('AlbumComponent Unit Tests:', () => {
       expect(component.playlists.length).toBe(1);
     });
 
-    it('should get album', done => {
-      setTimeout(() => {
-        component.ngOnInit();
+    it('should get album', () => {
+      component.ngOnInit();
 
-        expect(spySpofityGetAlbum).toHaveBeenCalledWith('album123');
-        done();
-      }, 0);
+      jasmine.clock().tick(5000);
+      expect(spySpofityGetAlbum).toHaveBeenCalledWith('album123');
     });
   });
 
