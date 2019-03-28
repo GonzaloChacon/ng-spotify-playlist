@@ -2,13 +2,13 @@
  * Gonzalo Chacón
  */
 
-export const USER_MOCK = {
+export const USER_MOCK: any = {
   display_name: 'Gonzalo Chacón',
   email: 'gonzalochacon@gmail.com',
   id: 'gonzalo_chacon'
 };
 
-export const PLAYLISTS_MOCK = [
+export const PLAYLISTS_MOCK: any = [
   {
     collaborative: false,
     external_urls: {
@@ -35,7 +35,7 @@ export const PLAYLISTS_MOCK = [
   }
 ];
 
-export const ARTIST_MOCK = {
+export const ARTIST_MOCK: any = {
   external_urls: {
     spotify: 'https://open.spotify.com/artist/someArtistID'
   },
@@ -53,7 +53,7 @@ export const ARTIST_MOCK = {
   uri: 'spotify:artist:someArtistID'
 };
 
-export const TRACKS_MOCK = [
+export const TRACKS_MOCK: any = [
   {
     artists: [ARTIST_MOCK],
     id: 'trackID1',
@@ -72,7 +72,7 @@ export const TRACKS_MOCK = [
   }
 ];
 
-export const ALBUM_MOCK = {
+export const ALBUM_MOCK: any = {
   album_type: 'album',
   artists: [ARTIST_MOCK],
   id: '0kaYtACg9wLVZZyrqSEHyU',

@@ -30,7 +30,7 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   spotifyStore: Store;
   playlistEvent: Event;
   user: IOwner;
-  // currentPlaylist - used to store reference to open playlsit, instead of search for it everywhere
+  // used to store reference to open playlsit, instead of search for it everywhere
   currentPlaylist: IPlaylist;
   playlists: IPlaylist[] = [];
 
@@ -194,7 +194,6 @@ export class PlaylistComponent implements OnInit, OnDestroy {
             this.playlists[playlistIndex].remove = true;
             setTimeout(() => {
               playlists.splice(playlistIndex, 1);
-
               this.spotifyStore.update({ playlists });
             }, 500);
           });

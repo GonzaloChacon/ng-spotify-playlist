@@ -8,7 +8,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable,  Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { objMergeDeep } from '../utils/utils';
 
 export class Store {
@@ -83,7 +83,11 @@ export class StoreService {
   }
 
   getEvent(key: string): Event {
-    return this.events[key];
+    if (this.events[key]) {
+      return this.events[key];
+    }
+
+    throw new Error(`Event ${key} does not exist.`);
   }
 
   emitEvent(key: string, state?: any) {
@@ -110,7 +114,11 @@ export class StoreService {
   }
 
   getStore(key: string): Store {
-    return this.stores[key];
+    if (this.stores[key]) {
+      return this.stores[key];
+    }
+
+    throw new Error(`Store ${key} does not exist.`);
   }
 
   deleteStore(key: string) {

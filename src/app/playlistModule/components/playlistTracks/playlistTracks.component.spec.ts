@@ -49,4 +49,77 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
       expect(spyEventEmitter).toHaveBeenCalledWith(res);
     });
   });
+
+  describe('set newLenght()', () => {
+    beforeEach(() => {
+      jasmine.clock().install();
+      component.tracks = [
+        {
+          id: 'track1',
+          display: false
+        },
+        {
+          id: 'track1',
+          display: false
+        }
+      ] as any;
+    });
+
+    afterEach(() => {
+      jasmine.clock().uninstall();
+    });
+
+    it('should call set track.display TRUE if tracks length', () => {
+      component.newLenght = 2;
+
+      jasmine.clock().tick(5000);
+      expect(component.tracks[0].display).toBe(true);
+      expect(component.tracks[1].display).toBe(true);
+    });
+  });
+
+  describe('set playlistTracks()', () => {
+    beforeEach(() => {
+      jasmine.clock().install();
+    });
+
+    afterEach(() => {
+      jasmine.clock().uninstall();
+    });
+
+    it('should call store tracks in component', () => {
+      expect(component.tracks).toBe(undefined);
+      component.playlistTracks = [
+        {
+          id: 'track1',
+          display: false
+        },
+        {
+          id: 'track1',
+          display: false
+        }
+      ] as any;
+
+      jasmine.clock().tick(5000);
+      expect(component.tracks.length).toBe(2);
+    });
+
+    it('should call set track.display TRUE', () => {
+      expect(component.tracks).toBe(undefined);
+      component.playlistTracks = [
+        {
+          id: 'track1',
+          display: false
+        },
+        {
+          id: 'track1',
+          display: false
+        }
+      ] as any;
+
+      jasmine.clock().tick(5000);
+      expect(component.tracks[0].display).toBe(true);
+      expect(component.tracks[1].display).toBe(true);
+    });
+  });
 });
