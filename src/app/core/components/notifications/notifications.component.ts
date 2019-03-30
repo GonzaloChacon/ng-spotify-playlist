@@ -35,7 +35,7 @@ export class NotificationsComponent implements OnInit {
     });
   }
 
-  hide(note) {
+  hide(note: Notification) {
     const index = this._notifications.indexOf(note);
 
     if (index >= 0) {

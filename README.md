@@ -1,7 +1,9 @@
 # [WIP] Ng Spotify Playlist
 
-NOTE: This is a work in progress, just started and far from finished.
-I'm just playing around with the Spotify API and also messing around with some javascript :)
+[![CircleCI](https://circleci.com/gh/GonzaloChacon/ng-spotify-playlist/tree/master.svg?style=svg)](https://circleci.com/gh/GonzaloChacon/ng-spotify-playlist/tree/master)
+
+> NOTE: This is a work in progress, just started and far from finished.
+> I'm just playing around with the Spotify API and also messing around with some javascript :)
 
 > ***TODO:***
 > - Finish search result components

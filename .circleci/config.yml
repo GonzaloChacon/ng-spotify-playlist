@@ -1,0 +1,28 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: circleci/node:10.12-browsers
+
+    working_directory: ~/repo
+
+    steps:
+      - run:
+          name: Install Stable Chrome
+          command: |
+            curl -s https://raw.githubusercontent.com/chronogolf/circleci-google-chrome/master/use_chrome_stable_version.sh | bash
+      - run:
+          name: Install NPM
+          command: |
+            sudo npm i -g npm@latest
+      - checkout
+      - run: npm install
+      - run: npm audit
+      - run: npm run lint
+      - run: npm test
+      - store_artifacts:
+          path: coverage
