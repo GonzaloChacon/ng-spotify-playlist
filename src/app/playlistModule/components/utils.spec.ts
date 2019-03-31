@@ -17,6 +17,19 @@ describe('setDisplay()', () => {
     expect(track.display).toBe(true);
     jasmine.clock().uninstall();
   });
+
+  it('should not set track.display FALSE if display already TRUE', () => {
+    const track = {
+      display: true
+    };
+    jasmine.clock().install();
+
+    setDisplay(track as any, 0);
+    jasmine.clock().tick(1000);
+
+    expect(track.display).toBe(true);
+    jasmine.clock().uninstall();
+  });
 });
 
 describe('playlistIncludes()', () => {
