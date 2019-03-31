@@ -2,15 +2,14 @@
  * Gonzalo Chacón
  */
 
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ITrack } from '@app/playlistModule/interfaces';
 import { StoreService, Event } from '@app/core/services';
 import { setDisplay } from '@app/playlistModule/components/utils';
 
 @Component({
   selector: 'app-playlist-tracks',
-  templateUrl: './playlistTracks.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './playlistTracks.component.html'
 })
 export class PlaylistTracksComponent implements OnInit {
   /*
