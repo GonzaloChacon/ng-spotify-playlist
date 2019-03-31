@@ -5,8 +5,10 @@
     *ngFor="let track of tracks;index as i"
     class="track {{ track.display && 'display' }} {{ track.remove && 'remove' }}">
     <!-- TODO: for some reason ngClass is not working here, check why -->
+    <i class="icon-music"></i>
+
     <span class="track-name">
-      <i class="icon-music"></i> {{ track.name }} <br>
+      {{ track.name }} <br>
       <a
         class="track-link"
         routerLink="/playlist/album/{{track.album.id}}">
@@ -21,7 +23,7 @@
     </span>
     <span>
       <a
-        class="btn btn-red"
+        class="btn btn-red btn-icon"
         *ngIf="canEdit"
         (click)="deleteTrack(track, i)">
         <i class="icon-trash-2"></i>

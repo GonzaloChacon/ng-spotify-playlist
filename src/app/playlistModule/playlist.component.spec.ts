@@ -3,7 +3,7 @@
  */
 
 import { of as observableOf } from 'rxjs';
-import { StoreService } from '@app/core/services';
+import { StoreService, AuthService } from '@app/core/services';
 import { SpotifyService } from './services';
 import { PlaylistComponent } from './playlist.component';
 import { USER_MOCK, PLAYLISTS_MOCK, TRACKS_MOCK } from '@app/core/utils/testMocks';
@@ -17,6 +17,7 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
   let _spotifyService: SpotifyService;
   let _storeService: StoreService;
   let _router: MockRouter;
+  let _authService: AuthService;
 
   let spyGetUser;
   let spyGetAllPlaylists;
@@ -26,6 +27,7 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
     _spotifyService = new SpotifyService(null);
     _router = new MockRouter();
     _storeService = new StoreService();
+    _authService = new AuthService(null, null);
     _storeService.createStore('spotify', { playlists: PLAYLISTS_MOCK });
     _storeService.createEvent('loading');
 
@@ -33,7 +35,7 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
     spyGetAllPlaylists = spyOn(_spotifyService, 'getAllPlaylists').and.returnValue(observableOf([PLAYLISTS_MOCK]));
     spyGetPlaylistTracks = spyOn(_spotifyService, 'getPlaylistTracks').and.returnValue(observableOf(TRACKS_MOCK));
 
-    component = new PlaylistComponent(_spotifyService, _storeService, (_router as any));
+    component = new PlaylistComponent(_spotifyService, _storeService, (_router as any), _authService);
   });
 
   describe('component creation()', () => {
@@ -371,6 +373,15 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
         expect(newState.playlists.length).toBe(1);
         jasmine.clock().uninstall();
       });
+    });
+  });
+
+  describe('logout()', () => {
+    it('should call authService.logout', () => {
+      const spy = spyOn(_authService, 'logout').and.returnValue(true);
+      component.logout();
+
+      expect(spy).toHaveBeenCalled();
     });
   });
 });

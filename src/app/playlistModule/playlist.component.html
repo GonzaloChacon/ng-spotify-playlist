@@ -1,6 +1,29 @@
 <section class="module">
 
+  <section
+    class="user"
+    (click)="logout()"
+    *ngIf="user">
+    <span class="user-text">
+      <span>{{ user.display_name }}</span>
+      <span>Logout</span>
+    </span>
+
+    <span class="user-badge">
+      <span
+        class="user-image"
+        [ngStyle]="{'background-image': 'url(' + user.images[0].url + ')'}"></span>
+      <i class="icon-log-in"></i>
+    </span>
+  </section>
+
   <div class="module-aside">
+
+    <div class="module-aside-logo">
+      <img src="/assets/img/logo_spotify.svg" />
+      <span>Playlist editor</span>
+    </div>
+
     <!-- Search -->
     <form
       [formGroup]="searchForm">
@@ -33,7 +56,7 @@
           <span>Tracks <b>{{ playlist.tracks.total }}</b></span>
           <span>Owner <b>{{ playlist.owner.display_name }}</b></span>
           <a
-            class="btn btn-gray btn-small"
+            class="btn btn-red btn-small"
             *ngIf="playlist.owner.id === user.id"
             (click)="updatePlaylist({
               action: 'REMOVE_PLAYLIST',
@@ -45,7 +68,7 @@
       </div>
 
       <a
-        class="btn btn-green"
+        class="btn btn-primary"
         *ngIf="!newPlaylist"
         (click)="newPlaylist = !newPlaylist">
         New playlist

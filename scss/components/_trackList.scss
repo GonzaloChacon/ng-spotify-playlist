@@ -35,16 +35,24 @@
     }
   }
 
+  i.icon-music {
+    color: $color-primary;
+    padding-right: 7px;
+    padding-top: 3px;
+  }
+
   &-name {
+    color: $color-font;
     flex-grow: 1;
     font-family: $font-title;
+    font-size: 1.3rem;
     line-height: 1.7rem;
     padding-bottom: 3px;
     position: relative;
 
-    i {
-      color: $color-primary;
-      padding-right: 5px;
+    a {
+      font-size: 1.1rem;
+      font-family: $font-sans;
     }
   }
 
@@ -63,7 +71,7 @@
       padding: 0;
       position: absolute;
       right: 0;
-      top: 20px;
+      top: 34px;
       visibility: hidden;
       z-index: -1;
       transform: translateY(20px);
@@ -77,24 +85,22 @@
       display: block;
     }
 
-    a {
+    &-list a {
       background: lighten($color-font, 5%);
       color: $color-font-light;
+      cursor: pointer;
       display: block;
       padding: 5px 10px;
-      width: 150px;
+      text-decoration: none;
+      transform-origin: top center;
+      transition: color 0.2s ease-in-out, background 0.2s ease-in-out;
+      width: 190px;
+      font-size: 1.1rem;
 
       i {
         color: $color-font-light;
         display: inline-block;
       }
-    }
-
-    a {
-      cursor: pointer;
-      text-decoration: none;
-      transform-origin: top center;
-      transition: color 0.2s ease-in-out, background 0.2s ease-in-out;
 
       &:hover {
         background: $color-font;
@@ -102,12 +108,12 @@
       }
     }
 
-    *:first-of-type {
+    &-list *:first-of-type {
       border-top-left-radius: 5px;
       border-top-right-radius: 5px;
     }
 
-    *:last-of-type {
+    &-list *:last-of-type {
       border-bottom-left-radius: 5px;
       border-bottom-right-radius: 5px;
     }

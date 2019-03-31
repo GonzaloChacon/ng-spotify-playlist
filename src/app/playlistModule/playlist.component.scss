@@ -9,15 +9,30 @@
   }
 
   &-aside {
-    background: $color-gray-1;
+    background: $color-aside;
     margin: 0;
     padding: 15px;
     width: 280px;
     z-index: 1;
+
+    &-logo {
+      align-items: center;
+      display: flex;
+      padding: 20px 0 30px;
+    }
+
+    &-logo img {
+      width: 100px;
+    }
+
+    &-logo span {
+      font-size: 1.4rem;
+      padding: 4px 0 0 5px;
+    }
   }
 
   &-tracks {
-    background: darken($color-gray-1, 3%);
+    background: $color-aside-2;
     overflow: auto;
     animation: slide-panel .2s ease-in-out forwards;
     width: 340px;
@@ -89,6 +104,10 @@
         line-height: 1.7rem;
         margin: 0;
       }
+
+      .btn-red {
+        margin-top: 10px;
+      }
     }
   }
 
@@ -99,6 +118,12 @@
 
   &-tracks {
     padding: 10px 15px;
+  }
+
+  .btn-primary {
+    margin-top: 15px;
+    text-align: center;
+    width: 100%;
   }
 }
 // end Playlists aside component

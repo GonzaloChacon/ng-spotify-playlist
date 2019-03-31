@@ -5,7 +5,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil, debounceTime } from 'rxjs/operators';
-import { StoreService, Store, Event } from '@app/core/services';
+import { StoreService, Store, Event, AuthService } from '@app/core/services';
 import { SpotifyService } from '@app/playlistModule/services';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ITrack, IPlaylist, IOwner } from '@app/playlistModule/interfaces';
@@ -46,7 +46,8 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   constructor(
     private _spotifyService: SpotifyService,
     private _storeService: StoreService,
-    private _router: Router
+    private _router: Router,
+    private _authService: AuthService
   ) {
     /*
      * Components loaded through the router-outlet can't bind values
@@ -201,6 +202,10 @@ export class PlaylistComponent implements OnInit, OnDestroy {
           });
       }
     }
+  }
+
+  logout() {
+    this._authService.logout();
   }
 
   ngOnDestroy(): void {

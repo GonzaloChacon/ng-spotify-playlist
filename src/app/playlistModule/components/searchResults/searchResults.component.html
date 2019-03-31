@@ -32,9 +32,10 @@
       *ngFor="let track of tracks; index as trackI"
       class="track {{ track.display && 'display' }}"
       [ngClass]="{ 'open-actions': options === trackI }">
+      <i class="icon-music"></i>
 
       <span class="track-name">
-        <i class="icon-music"></i> {{ track.name }} <br />
+        {{ track.name }} <br />
         <a
           class="track-link"
           routerLink="/playlist/album/{{track.album.id}}">
@@ -65,10 +66,11 @@
             </ng-template>
           </ng-template>
         </span>
-        <i
-          class="icon-more-horizontal"
+        <a
+          class="btn btn-green btn-icon"
           (click)="toggleTrackOpt($event, trackI)">
-        </i>
+          <i class="icon-more-horizontal"></i>
+        </a>
       </span>
     </div>
 
