@@ -19,29 +19,32 @@
 
   <div class="module-aside">
 
-    <div class="module-aside-logo">
-      <img src="/assets/img/logo_spotify.svg" />
-      <span>Playlist editor</span>
-    </div>
+    <div class="module-aside-top">
+      <div class="module-aside-logo">
+        <img src="/assets/img/logo_spotify.svg" />
+        <span>Playlist editor</span>
+      </div>
 
-    <!-- Search -->
-    <form
-      [formGroup]="searchForm">
-      <fieldset>
-        <input
-          type="text"
-          name="search"
-          formControlName="search"
-          placeholder="Search for"/>
-      </fieldset>
-    </form>
-    <!-- end Search -->
+      <!-- Search -->
+      <form
+        [formGroup]="searchForm">
+        <fieldset>
+          <input
+            type="text"
+            name="search"
+            formControlName="search"
+            placeholder="Search for"/>
+        </fieldset>
+      </form>
+      <!-- end Search -->
+    </div>
 
 
     <!-- Playlists -->
     <section
       class="playlists"
       *ngIf="playlists">
+
       <div
         class="playlists-item {{ playlist.display && 'display' }} {{ playlist.remove && 'remove' }}"
         *ngFor="let playlist of playlists; index as i"

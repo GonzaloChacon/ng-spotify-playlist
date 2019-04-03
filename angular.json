@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ng-spoti-fy": {
+    "ng-spotify-playlist": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ng-spoti-fy",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-spoti-fy:build"
+            "browserTarget": "ng-spotify-playlist:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ng-spoti-fy:build:production"
+              "browserTarget": "ng-spotify-playlist:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ng-spoti-fy:build"
+            "browserTarget": "ng-spotify-playlist:build"
           }
         },
         "test": {
@@ -107,7 +107,7 @@
         }
       }
     },
-    "ng-spoti-fy-e2e": {
+    "ng-spotify-playlist-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "prefix": "",
@@ -116,11 +116,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ng-spoti-fy:serve"
+            "devServerTarget": "ng-spotify-playlist:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ng-spoti-fy:serve:production"
+              "devServerTarget": "ng-spotify-playlist:serve:production"
             }
           }
         },
@@ -136,5 +136,5 @@
       }
     }
   },
-  "defaultProject": "ng-spoti-fy"
+  "defaultProject": "ng-spotify-playlist"
 }

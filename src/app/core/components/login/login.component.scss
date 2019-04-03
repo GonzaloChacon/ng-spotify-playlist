@@ -1,0 +1,32 @@
+.loging {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  margin: auto;
+  max-width: 550px;
+  text-align: center;
+
+  img {
+    display: block;
+    margin: auto;
+    max-width: 300px;
+    padding: 25px;
+  }
+
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  p {
+    color: $color-font-light;
+    font-size: 1.5rem;
+    line-height: 2.3rem;
+    margin: 0 0 40px;
+  }
+
+  .btn {
+    font-size: 1.4rem;
+    padding: 11px 35px;
+  }
+}

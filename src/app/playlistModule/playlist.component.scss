@@ -11,7 +11,7 @@
   &-aside {
     background: $color-aside;
     margin: 0;
-    padding: 15px;
+    padding: 0 35px 15px;
     width: 280px;
     z-index: 1;
 
@@ -31,11 +31,32 @@
     }
   }
 
+  &-aside-top {
+    background: white;
+    border-bottom: 1px solid $color-bg-2;
+    margin: 0 -35px 25px;
+    padding: 15px 35px 15px;
+
+    i {
+      background: transparent;
+      padding: 6px 0;
+    }
+
+    input {
+      background: transparent;
+      border-color: $color-bg-2;
+      padding: 6px 0;
+    }
+  }
+
   &-tracks {
     background: $color-aside-2;
     overflow: auto;
     animation: slide-panel .2s ease-in-out forwards;
     width: 340px;
+
+    border-left: 1px solid #e8e8e8;
+    border-right: 1px solid #e8e8e8;
   }
 }
 

@@ -27,9 +27,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     this._storeService.emitEvent('loading', false);
 
     this._activatedRouter.fragment
-      .pipe(
-        takeUntil(this._destroy)
-      )
+      .pipe(takeUntil(this._destroy))
       .subscribe((fragment: string) => {
         const hashParams = new URLSearchParams(fragment);
         const accessToken = hashParams.get('access_token');

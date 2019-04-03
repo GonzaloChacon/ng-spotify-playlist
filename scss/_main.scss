@@ -10,7 +10,9 @@ html {
 
 html,
 body {
-  background: $color-bg;
+  // background: $color-bg;
+  background: url('assets/img/bg_body3.jpg') center right no-repeat;
+  background-size: cover;
   color: $color-font;
   font-family: $font-sans;
   font-size: 1.2rem;

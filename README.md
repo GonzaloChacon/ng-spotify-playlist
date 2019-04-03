@@ -13,7 +13,6 @@ This is a Angular front end project that communicates with the  [Spotify Web API
 
 > ***TODO:***
 > - Create UI for both desktop and mobile
-> - ...SOME MORE STUFF I DON'T KNOW YET!
 
 ## About this project
 
@@ -21,18 +20,21 @@ This porject was intended to implement only the basic dependencies necesary to r
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli).
 
-#### ***- Install***
+#### **- Install**
 Clone repo and run `npm install` (Make sure to have installed Node and NPM before).
 
-#### ***- Development server:***
+#### **- Development server:**
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-#### ***- Build:***
+#### **- Build:**
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-#### ***- Running unit tests:***
+#### **- Running unit tests:**
 Run `npm run test` to run tests once with `code coverage` results. (results will be stored at `/coverage`).
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+#### **- Bundle analyzer:**
+Run `npm run report` to run webpack-bundle-analyzer, a new tab will be open automatically in the browser with the results.
 
 ## Features
 

@@ -26,7 +26,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   playlists: IPlaylist[] = [];
   options: number;
 
-  toggleTrackOpt: () => any = toggleTrackOpt.bind(this);
+  toggleTrackOpt: (e: any, i: any) => any = toggleTrackOpt.bind(this);
   playlistIncludes = playlistIncludes;
 
   constructor(

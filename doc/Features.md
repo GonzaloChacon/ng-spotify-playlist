@@ -3,7 +3,7 @@
 Below are listes a couple of features, only the ones worth mention.
 There are plenty of libraries that address the below features, but I wanted something simple and small. The idea is to avoid to implement a complete library just for two or three features, also, part of the idea of this app was to to experiment.
 
-- [StoreService](#store-service)
+- [Store Service](#store-service)
 - [Notifications](#notifications)
 
 ## Store Service
