@@ -9,15 +9,16 @@
   </div>
 
   <section class="artist-albums">
+    <span class="artist-section">Albums</span>
     <a
       *ngFor="let album of albums"
       routerLink="/playlist/album/{{album.id}}">
-      <img src="{{album.images[0].url}}" />
-      {{ album.name }}
+      <img src="{{album.images[0].url}}" title="{{album.name}}"/>
     </a>
   </section>
 
   <section  class="artist-related">
+    <span class="artist-section">Related artists</span>
     <a
       class="btn btn-gray"
       *ngFor="let artist of relatedArtists"

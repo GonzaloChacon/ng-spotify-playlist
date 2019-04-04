@@ -45,18 +45,16 @@
     input {
       background: transparent;
       border-color: $color-bg-2;
-      padding: 6px 0;
+      padding: 6px 10px;
     }
   }
 
   &-tracks {
+    animation: slide-panel .5s ease-in-out forwards;
     background: $color-aside-2;
+    border-left: 1px solid $color-bg-2;
+    border-right: 1px solid $color-bg-2;
     overflow: auto;
-    animation: slide-panel .2s ease-in-out forwards;
-    width: 340px;
-
-    border-left: 1px solid #e8e8e8;
-    border-right: 1px solid #e8e8e8;
   }
 }
 
@@ -106,14 +104,14 @@
       font-size: 1.6rem;
       left: 20px;
       margin: 0;
-      padding: 10px 15px;
+      padding: 10px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
     p {
-      padding: 0 15px;
+      padding: 0 10px;
       margin-top: 0;
       position: relative;
       transform: translateY(350px);
@@ -134,7 +132,33 @@
 
   &-new {
     transform: translateX(-400px);
-    animation: slide-panel .4s ease-in-out forwards;
+    animation: slide-form .4s ease-in-out forwards;
+    margin-top: 30px;
+
+    fieldset {
+      position: relative;
+    }
+
+    button {
+      position: absolute;
+      right: 0;
+      border-radius: 0;
+    }
+
+    label {
+      color: $color-font-light;
+      padding: 0 10px;
+
+      input {
+        margin-right: 5px;
+      }
+    }
+
+    input {
+      background: transparent;
+      border-color: $color-bg-2;
+      padding: 6px 40px 6px 10px;
+    }
   }
 
   &-tracks {
@@ -148,7 +172,26 @@
   }
 }
 // end Playlists aside component
+
 @keyframes slide-panel {
+  /*
+   * TODO: We need to transition width and min-width in order for the content
+   * to slide content to the right. Check for a more CSS performant approach.
+   */
+  0% {
+    transform: translateX(-400px);
+    min-width: 0;
+    width: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    min-width: 340px;
+    width: 340px;
+  }
+}
+
+@keyframes slide-form {
   0% {
     transform: translateX(-400px);
   }
