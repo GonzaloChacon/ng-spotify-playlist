@@ -15,6 +15,7 @@ import { StoreService, AuthService } from '@app/core/services';
 
 export class LoginComponent implements OnInit, OnDestroy {
   private _destroy: Subject<boolean> = new Subject<boolean>();
+  host: string = window.location.host;
 
   constructor(
     private _storeService: StoreService,

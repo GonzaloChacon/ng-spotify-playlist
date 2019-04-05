@@ -6,8 +6,6 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-export const SpotifyAPIKey = 'BQCyMZsAEajqQoJGpHahG5bfDOWfgJjsoLVoxqo09hVMVB8QUi81ly30lODaWvAcYjJ3UaWx7w8XZcvsqDw';
-
 export const environment = {
   production: false,
   spotifyUrl: 'https://api.spotify.com/v1'

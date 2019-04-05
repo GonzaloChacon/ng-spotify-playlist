@@ -24,17 +24,20 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Clone repo and run `npm install` (Make sure to have installed Node and NPM before).
 
 #### **- Development server:**
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+`ng serve` will run a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 #### **- Build:**
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+`ng build` will build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+
+#### **- Run app as a PWA:**
+`npm run start-pwa` will build app and start a server which will load the app as a PWA. Navigate to `http://127.0.0.1:3000/`
 
 #### **- Running unit tests:**
-Run `npm run test` to run tests once with `code coverage` results. (results will be stored at `/coverage`).
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+`npm run test` will run tests only once and will include `code coverage` analysis. (results will be stored at `/coverage`).
+`ng test` will execute the unit tests via [Karma](https://karma-runner.github.io).
 
 #### **- Bundle analyzer:**
-Run `npm run report` to run webpack-bundle-analyzer, a new tab will be open automatically in the browser with the results.
+`npm run report` will run `webpack-bundle-analyzer`, a will open a new tab in the browser with the results.
 
 ## Features
 

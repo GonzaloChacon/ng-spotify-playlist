@@ -8,15 +8,17 @@
   },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "serve:pwa": "http-server ./dist -o",
     "build": "ng build --prod",
     "test": "ng test --watch=false --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "report:stats": "ng build --prod --stats-json",
     "report:analyze": "webpack-bundle-analyzer dist/stats.json",
-    "report": "npm-run-all report:stats report:analyze"
+    "report": "npm-run-all report:stats report:analyze",
+    "start-pwa": "npm-run-all build serve:pwa"
   },
+  "private": true,
   "dependencies": {
     "@angular/animations": "7.2.12",
     "@angular/common": "7.2.12",
@@ -25,7 +27,9 @@
     "@angular/forms": "7.2.12",
     "@angular/platform-browser": "7.2.12",
     "@angular/platform-browser-dynamic": "7.2.12",
+    "@angular/pwa": "0.12.4",
     "@angular/router": "7.2.12",
+    "@angular/service-worker": "7.2.12",
     "core-js": "2.5.4",
     "rxjs": "6.4.0",
     "tslib": "1.9.3",
@@ -40,6 +44,7 @@
     "@types/jasminewd2": "2.0.3",
     "@types/node": "11.12.2",
     "codelyzer": "5.0.0",
+    "http-server": "0.11.1",
     "jasmine-core": "2.99.1",
     "jasmine-spec-reporter": "4.2.1",
     "karma": "4.0.1",

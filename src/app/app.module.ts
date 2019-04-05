@@ -12,6 +12,8 @@ import { AppComponent } from './app.component';
 
 import { Routing } from './app.routes';
 import { AppErrorHandler } from '@app/core/services';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,8 @@ import { AppErrorHandler } from '@app/core/services';
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
-    Routing
+    Routing,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [
     {
