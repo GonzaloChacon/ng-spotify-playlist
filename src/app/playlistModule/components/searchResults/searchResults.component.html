@@ -5,11 +5,14 @@
   <!-- Artists Results -->
   <section *ngIf="artists">
     <a
-      class="artist"
+      class="artist artist-badge"
       routerLink="/playlist/artist/{{ artist.id }}"
       *ngFor="let artist of artists">
-      <span [ngStyle]="{'background-image': 'url(' + artist.images[0].url + ')'}"></span>
-      <h5>{{ artist.name }}</h5>
+      <span
+        class="artist-image"
+        [ngStyle]="{'background-image': 'url(' + artist.images[0].url + ')'}">
+      </span>
+      <span class="title">{{ artist.name }}</span>
     </a>
   </section>
   <!-- end Artists Results -->
@@ -18,10 +21,12 @@
   <section *ngIf="albums">
     <a
       class="album"
+      [attr.aria-label]="album.name"
       routerLink="/playlist/album/{{ album.id }}"
       *ngFor="let album of albums">
-      <img src="{{ album.images[0].url }}" />
-      <h5>{{ album.name }}</h5>
+      <img
+        src="{{ album.images[0].url }}"
+        [attr.alt]="album.name"/>
     </a>
   </section>
   <!-- end Albums Results -->
@@ -38,12 +43,14 @@
         {{ track.name }} <br />
         <a
           class="track-link"
+          [attr.aria-label]="track.album.name"
           routerLink="/playlist/album/{{track.album.id}}">
           {{track.album.name}}
         </a>
         &#8226;
         <a
           class="track-link"
+          [attr.aria-label]="track.album.artists[0].name"
           routerLink="/playlist/artist/{{track.album.artists[0].id}}">
           {{track.album.artists[0].name}}
         </a>
@@ -54,12 +61,15 @@
           <ng-template ngFor let-playlist [ngForOf]="playlists">
             <a
               *ngIf="!playlistIncludes(playlist, track); else includedInPlaylist"
+              [attr.aria-label]="'Add to ' + playlist.name"
               (click)="updatePlaylist('ADD_TRACK', playlist.id, track)">
               Add to <b>{{ playlist.name }}</b>
             </a>
 
             <ng-template #includedInPlaylist>
-              <a (click)="updatePlaylist('DELETE_TRACK', playlist.id, track)">
+              <a
+                [attr.aria-label]="'Remove from ' + playlist.name"
+                (click)="updatePlaylist('DELETE_TRACK', playlist.id, track)">
                 <i class="icon-check"></i>
                 Remove from <b>{{ playlist.name }}</b>
               </a>
@@ -68,6 +78,7 @@
         </span>
         <a
           class="btn btn-green btn-icon"
+          aria-label="More"
           (click)="toggleTrackOpt($event, trackI)">
           <i class="icon-more-horizontal"></i>
         </a>

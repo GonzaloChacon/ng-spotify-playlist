@@ -3,12 +3,6 @@
   padding: 15px 75px;
   margin: auto;
 
-  .artist {
-    img {
-      width: 200px;
-    }
-  }
-
   .artist-section {
     border-bottom: 1px solid $color-gray-v2;
     display: block;
@@ -18,6 +12,8 @@
   }
 
   .artist-albums {
+    margin: 40px 0 50px;
+
     a {
       display: inline-block;
       margin: 10px;
@@ -27,14 +23,6 @@
     a img {
       display: block;
       width: 100%;
-    }
-  }
-
-  .artist-related {
-    padding: 40px 0 50px;
-
-    a {
-      margin: 4px 2px;
     }
   }
 }

@@ -11,12 +11,14 @@
       {{ track.name }} <br>
       <a
         class="track-link"
+        [attr.aria-label]="track.album.name"
         routerLink="/playlist/album/{{track.album.id}}">
         {{track.album.name}}
       </a>
       &#8226;
       <a
         class="track-link"
+        [attr.aria-label]="track.album.artists[0].name"
         routerLink="/playlist/artist/{{track.album.artists[0].id}}">
         {{track.album.artists[0].name}}
       </a>
@@ -24,6 +26,7 @@
     <span>
       <a
         class="btn btn-red btn-icon"
+        aria-label="Delete track"
         *ngIf="canEdit"
         (click)="deleteTrack(track, i)">
         <i class="icon-trash-2"></i>

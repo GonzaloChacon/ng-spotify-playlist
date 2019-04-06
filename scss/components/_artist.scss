@@ -1,13 +1,59 @@
-.artist {
-  border-radius: 50%;
-  display: inline-block;
-  padding: 10px;
-  text-align: center;
+$image-size: 150px;
+$image-size-badge: 100px;
 
-  span {
+.artist {
+  display: flex;
+  padding: 10px;
+
+  &-image {
+    background: no-repeat center center;
     background-size: cover;
     border-radius: 50%;
     display: inline-block;
-    width: 150px;
+    min-width: $image-size;
+    height: $image-size;
+    width: $image-size;
+  }
+
+  &-content {
+    padding-left: 40px;
+
+    b {
+      display: block;
+      font-size: 1.6rem;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+    }
+  }
+
+  section {
+    a {
+      margin: 4px 2px;
+    }
+
+    i {
+      color: $color-font-light;
+      display: block;
+      margin: 20px 0 10px;
+    }
+  }
+
+  &-badge {
+    display: inline-block;
+    text-align: center;
+    max-width: 140px;
+    padding: 20px;
+  }
+
+  &-badge &-image {
+    margin-bottom: 10px;
+    min-width: $image-size-badge;
+    height: $image-size-badge;
+    width: $image-size-badge;
+  }
+
+  &-badge .title {
+    display: block;
+    text-align: center;
   }
 }

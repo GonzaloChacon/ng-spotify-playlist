@@ -21,7 +21,9 @@
 
     <div class="module-aside-top">
       <div class="module-aside-logo">
-        <img src="/assets/img/logo_spotify.svg" />
+        <img
+          src="/assets/img/logo_spotify.svg"
+          alt="Spotify" />
         <span>Playlist editor</span>
       </div>
 
@@ -29,11 +31,13 @@
       <form
         [formGroup]="searchForm">
         <fieldset>
-          <input
-            type="text"
-            name="search"
-            formControlName="search"
-            placeholder="Search for"/>
+          <label for="search">
+            <input
+              type="text"
+              name="search"
+              formControlName="search"
+              placeholder="Search for" />
+          </label>
         </fieldset>
       </form>
       <!-- end Search -->
@@ -60,6 +64,7 @@
           <span>Owner <b>{{ playlist.owner.display_name }}</b></span>
           <a
             class="btn btn-red btn-small"
+            [attr.aria-label]="'Remove playlist ' + playlist.name"
             *ngIf="playlist.owner.id === user.id"
             (click)="updatePlaylist({
               action: 'REMOVE_PLAYLIST',
@@ -72,6 +77,7 @@
 
       <a
         class="btn btn-primary"
+        aria-label="New playlist"
         *ngIf="!newPlaylist"
         (click)="newPlaylist = !newPlaylist">
         New playlist
@@ -87,11 +93,13 @@
           playlist: playlistForm.value
         })">
         <fieldset>
-          <input
-            type="text"
-            name="name"
-            formControlName="name"
-            placeholder="Name your playlist :)"/>
+          <label for="name">
+            <input
+              type="text"
+              name="name"
+              formControlName="name"
+              placeholder="Name your playlist :)"/>
+          </label>
 
           <button
             class="btn btn-green btn-icon">

@@ -22,12 +22,9 @@ body {
 * {
   box-sizing: border-box;
   -webkit-text-size-adjust: none;
-  // Removes outline from focus elements in Chrome
-  &:focus {
-    outline: none !important;
-  }
 }
 
+.title,
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-title;
 }

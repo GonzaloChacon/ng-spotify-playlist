@@ -5,9 +5,13 @@
 
   <article>
     <header class="album">
-      <img src="{{album.images[0].url}}">
+      <img
+        src="{{album.images[0].url}}"
+        [attr.alt]="album.name">
       <h5>{{ album.name }}</h5>
-      <a routerLink="/playlist/artist/{{album.artists[0].id}}">{{ album.artists[0].name }}</a>
+      <a
+        [attr.aria-label]="album.artists[0].name"
+        routerLink="/playlist/artist/{{album.artists[0].id}}">{{ album.artists[0].name }}</a>
       <span>Tracks <b>{{ album.tracks.total }}</b></span>
     </header>
 
@@ -27,12 +31,14 @@
           <ng-template ngFor let-playlist [ngForOf]="playlists">
             <a
               *ngIf="!playlistIncludes(playlist, track); else includedInPlaylist;"
+              [attr.aria-label]="'Add to ' + playlist.name"
               (click)="updatePlaylist('ADD_TRACK', playlist.id, track)">
               Add to <b>{{ playlist.name }}</b>
             </a>
 
             <ng-template #includedInPlaylist>
               <a
+                [attr.aria-label]="'Remove from ' + playlist.name"
                 (click)="updatePlaylist('DELETE_TRACK', playlist.id, track)">
                 <i class="icon-check"></i>
                 Remove from <b>{{ playlist.name }}</b>
@@ -42,6 +48,7 @@
         </span>
         <a
           class="btn btn-green btn-icon"
+          aria-label="More"
           (click)="toggleTrackOpt($event, trackI)">
           <i class="icon-more-horizontal"></i>
         </a>
