@@ -177,6 +177,7 @@ describe('PlaylistTracksComponent Unit Tests:', () => {
 
   describe('setDisplays()', () => {
     const playlist = {
+      id: '123',
       tracks: {
         items: [
           {

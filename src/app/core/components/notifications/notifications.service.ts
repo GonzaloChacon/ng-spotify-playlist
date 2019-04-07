@@ -27,7 +27,7 @@ export class Notification {
 })
 export class NotificationsService {
   private _notifications = new Subject<Notification>();
-  private _messageType = ['success', 'error', 'warning', 'info'];
+  private _messageType = ['success', 'error', 'info'];
 
   noteAdded: Observable<any>;
 

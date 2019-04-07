@@ -3,7 +3,9 @@
   (click)="toggleTrackOpt($event, null)">
 
   <!-- Artists Results -->
-  <section *ngIf="artists">
+  <section
+    class="search-component-artists"
+    *ngIf="artists">
     <a
       class="artist artist-badge"
       routerLink="/playlist/artist/{{ artist.id }}"
@@ -18,7 +20,9 @@
   <!-- end Artists Results -->
 
   <!-- Albums Results -->
-  <section *ngIf="albums">
+  <section
+    class="search-component-artists"
+    *ngIf="albums">
     <a
       class="album"
       [attr.aria-label]="album.name"

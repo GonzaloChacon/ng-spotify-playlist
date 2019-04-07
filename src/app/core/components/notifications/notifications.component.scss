@@ -9,41 +9,63 @@
   z-index: 100000;
 
   div {
-    opacity: 0;
-    transition: opacity 0.5s ease-in;
-    border: 1px solid;
-    border-radius: 2px;
-    color: white;
+    border-radius: 3px;
+    color: $color-gray-1;
     cursor: pointer;
-    margin-bottom: 0.5em;
-    min-height: 3em;
+    margin-bottom: 5px;
+    max-width: 300px;
     opacity: 0;
-    padding: 1em;
-    text-align: center;
-    width: 300px;
+    padding: 15px 25px 15px 20px;
+
+    p {
+      font-size: 1.5rem;
+      line-height: 1.8rem;
+      margin: 0;
+      padding: 0 0 0 25px;
+      position: relative;
+
+      &:before {
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        color: $color-gray-1;
+        content: '';
+        font-family: 'icomoon' !important;
+        font-size: 1.8rem;
+        font-style: normal;
+        font-variant: normal;
+        font-weight: bold;
+        font-weight: normal;
+        left: 0;
+        line-height: 1;
+        position: absolute;
+        text-transform: none;
+        top: 0;
+      }
+    }
 
     &.success {
       background-color: $color-primary;
-      border-color: darken($color-primary, 30%);
+      p:before {
+        content: "\e902";
+      }
     }
 
     &.error {
       background-color: $color-red-1;
-      border-color: darken($color-red-1, 10%);
-    }
-
-    &.warning {
-      background-color: $color-orange;
-      border-color: darken($color-orange, 30%);
+      p:before {
+        content: "\e901";
+      }
     }
 
     &.info {
-      background-color: $color-blue;
-      border-color: darken($color-blue, 30%);
+      background-color: $color-font-light;
+      p:before {
+        content: "\e905";
+      }
     }
 
     &.display {
-      opacity:1;
+      animation: notifications-display .5s ease-in-out forwards;
     }
   }
 }
@@ -55,8 +77,24 @@
     top: 0;
 
     div {
-      width: 100%;
       text-align: left;
+      width: 100%;
     }
+  }
+}
+
+@keyframes notifications-display {
+  /*
+   * TODO: We need to transition width and min-width in order for the content
+   * to slide content to the right. Check for a more CSS performant approach.
+   */
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

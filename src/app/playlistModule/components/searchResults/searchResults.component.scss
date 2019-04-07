@@ -6,8 +6,9 @@
     padding: 15px 75px;
   }
 
-  > &-albums,
-  > &-artists {
+  &-albums,
+  &-artists {
     display: flex;
+    flex-flow: wrap;
   }
 }

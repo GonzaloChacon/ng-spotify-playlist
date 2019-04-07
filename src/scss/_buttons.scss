@@ -49,6 +49,24 @@
     }
   }
 
+  &-green-transparent {
+    border-color: transparent;
+    background: transparent;
+    color: $color-font;
+    &:hover {
+      color: $color-primary;
+    }
+  }
+
+  &-red-transparent {
+    border-color: transparent;
+    background: transparent;
+    color: $color-font-light;
+    &:hover {
+      color: $color-red-1;
+    }
+  }
+
   &-red {
     border-color: $color-bg-2;
     background: $color-bg-2;

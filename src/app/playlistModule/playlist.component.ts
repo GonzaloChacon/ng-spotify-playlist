@@ -111,11 +111,10 @@ export class PlaylistComponent implements OnInit, OnDestroy {
   }
 
   setDisplays(playlist: IPlaylist) {
-    if (playlist.tracks.items.length) {
+    if (playlist.id !== (this.currentPlaylist || {}).id && playlist.tracks.items.length) {
       playlist.tracks.items.forEach(track => track.display = false);
+      this.currentPlaylist = playlist;
     }
-
-    this.currentPlaylist = playlist;
   }
 
   slideInPlaylist(playlist: IPlaylist, i: number) {

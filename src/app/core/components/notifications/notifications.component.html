@@ -3,7 +3,7 @@
     class="{{ note.type }}"
     [ngClass]="{'display': !note.hide}"
     (click)="hide(note)"
-    *ngFor="let note of _notifications"
-    [innerHTML]="note.message">
+    *ngFor="let note of _notifications">
+    <p [innerHTML]="note.message"></p>
   </div>
 </section>

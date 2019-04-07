@@ -13,7 +13,7 @@
       <span
         class="user-image"
         [ngStyle]="{'background-image': 'url(' + user.images[0].url + ')'}"></span>
-      <i class="icon-log-in"></i>
+      <i class="icon-log-out"></i>
     </span>
   </section>
 
@@ -29,15 +29,19 @@
 
       <!-- Search -->
       <form
+        class="search-form"
         [formGroup]="searchForm">
         <fieldset>
-          <label for="search">
-            <input
-              type="text"
-              name="search"
-              formControlName="search"
-              placeholder="Search for" />
-          </label>
+          <input
+            type="text"
+            name="search"
+            formControlName="search"
+            placeholder="Search for" />
+
+          <button
+            class="btn btn-green-transparent btn-icon">
+            <i class="icon-search"></i>
+          </button>
         </fieldset>
       </form>
       <!-- end Search -->
@@ -93,16 +97,14 @@
           playlist: playlistForm.value
         })">
         <fieldset>
-          <label for="name">
-            <input
-              type="text"
-              name="name"
-              formControlName="name"
-              placeholder="Name your playlist :)"/>
-          </label>
+          <input
+            type="text"
+            name="name"
+            formControlName="name"
+            placeholder="Name your playlist :)"/>
 
           <button
-            class="btn btn-green btn-icon">
+            class="btn btn-green-transparent btn-icon">
             <i class="icon-check"></i>
           </button>
         </fieldset>
@@ -116,6 +118,13 @@
               formControlName="public"/>
             <i>Make private</i>
           </label>
+
+          <button
+            type="button"
+            (click)="newPlaylist = !newPlaylist"
+            class="btn btn-red-transparent btn-icon">
+            <i class="icon-x"></i>
+          </button>
         </fieldset>
       </form>
       <!-- end Create Playlist -->

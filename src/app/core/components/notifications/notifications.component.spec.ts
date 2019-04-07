@@ -36,7 +36,7 @@ describe('NotificationsComponent Unit Tests:', () => {
     it('should return error if card type is not valid', () => {
       component.ngOnInit();
 
-      expect(_notificationsService.add.bind(_notificationsService, 'wathever', 'Some message', 10)).toThrowError('Message type invalid, valid card types are [success,error,warning,info]');
+      expect(_notificationsService.add.bind(_notificationsService, 'wathever', 'Some message', 10)).toThrowError('Message type invalid, valid card types are [success,error,info]');
     });
   });
 

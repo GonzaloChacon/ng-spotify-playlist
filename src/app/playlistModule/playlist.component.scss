@@ -10,8 +10,11 @@
 
   &-aside {
     background: $color-aside;
+    display: flex;
+    flex-direction: column;
     margin: 0;
-    padding: 0 35px 15px;
+    min-width: 280px;
+    padding: 0;
     width: 280px;
     z-index: 1;
 
@@ -34,7 +37,6 @@
   &-aside-top {
     background: white;
     border-bottom: 1px solid $color-bg-2;
-    margin: 0 -35px 25px;
     padding: 15px 35px 15px;
 
     i {
@@ -58,8 +60,20 @@
   }
 }
 
+.search-form {
+  position: relative;
+
+  button {
+    position: absolute;
+    right: 0;
+    border-radius: 0;
+  }
+}
+
 // Playlists aside component
 .playlists {
+  padding: 30px 35px 40px;
+  overflow: auto;
 
   &-item{
     border-bottom: 1px solid $color-green-1;
@@ -132,8 +146,8 @@
 
   &-new {
     transform: translateX(-400px);
-    animation: slide-form .4s ease-in-out forwards;
-    margin-top: 30px;
+    animation: slide-form .2s ease-in-out forwards;
+    margin-top: 20px;
 
     fieldset {
       position: relative;
@@ -147,7 +161,8 @@
 
     label {
       color: $color-font-light;
-      padding: 0 10px;
+      display: inline-block;
+      padding: 6px 10px;
 
       input {
         margin-right: 5px;
@@ -166,7 +181,8 @@
   }
 
   .btn-primary {
-    margin-top: 15px;
+    animation: slide-form .2s ease-in-out forwards;
+    margin-top: 20px;
     text-align: center;
     width: 100%;
   }
