@@ -13,7 +13,8 @@ import { toggleTrackOpt, playlistIncludes, setDisplay } from '@app/playlistModul
 
 @Component({
   selector: 'app-search-results',
-  templateUrl: './searchResults.component.html'
+  templateUrl: './searchResults.component.html',
+  styleUrls: ['./searchResults.component.scss']
 })
 export class SearchResultsComponent implements OnInit, OnDestroy {
   private _destroy: Subject<boolean> = new Subject<boolean>();

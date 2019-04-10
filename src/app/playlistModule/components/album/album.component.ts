@@ -13,7 +13,8 @@ import { toggleTrackOpt, playlistIncludes, setDisplay } from '@app/playlistModul
 
 @Component({
   selector: 'app-album',
-  templateUrl: './album.component.html'
+  templateUrl: './album.component.html',
+  styleUrls: ['./album.component.scss']
 })
 export class AlbumComponent implements OnInit, OnDestroy {
   private _destroy: Subject<boolean> = new Subject<boolean>();

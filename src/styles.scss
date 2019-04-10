@@ -1,25 +1,21 @@
-/* You can add global styles to this file, and also import other style files */
+// Utils
+@import 'utils/variables';
+@import 'utils/mixins';
 
-@import './scss/utils/variables';
-@import './scss/utils/mixins';
-@import './scss/fonts';
-@import './scss/main';
-@import './scss/buttons';
-@import './scss/forms';
-@import './scss/animations';
+// Global
+@import 'fonts';
+@import 'main';
+@import 'buttons';
+@import 'forms';
+@import 'animations';
 
 // CSS Components
-@import './scss/components/footer';
-@import './scss/components/trackList';
-@import './scss/components/album';
-@import './scss/components/artist';
-@import './scss/components/user';
+@import 'components/footer';
+@import 'components/trackList';
+@import 'components/album';
+@import 'components/artist';
+@import 'components/user';
 
 // NG Components
 @import './app/core/components/notifications/notifications.component.scss';
 @import './app/core/components/login/login.component.scss';
-@import './app/playlistModule/components/searchResults/searchResults.component.scss';
-@import './app/playlistModule/playlist.component.scss';
-@import './app/playlistModule/components/album/album.component.scss';
-@import './app/playlistModule/components/artist/artist.component.scss';
-@import './app/playlistModule/components/playlistTracks/playlistTracks.component.scss';

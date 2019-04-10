@@ -9,7 +9,8 @@ import { setDisplay } from '@app/playlistModule/components/utils';
 
 @Component({
   selector: 'app-playlist-tracks',
-  templateUrl: './playlistTracks.component.html'
+  templateUrl: './playlistTracks.component.html',
+  styleUrls: ['./playlistTracks.component.scss']
 })
 export class PlaylistTracksComponent implements OnInit {
   /*

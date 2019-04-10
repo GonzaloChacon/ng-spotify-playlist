@@ -20,7 +20,8 @@ export interface IPlaylistEvent {
 
 @Component({
   selector: 'app-playlist',
-  templateUrl: './playlist.component.html'
+  templateUrl: './playlist.component.html',
+  styleUrls: ['./playlist.component.scss']
 })
 export class PlaylistComponent implements OnInit, OnDestroy {
   private _destroy: Subject<boolean> = new Subject<boolean>();
